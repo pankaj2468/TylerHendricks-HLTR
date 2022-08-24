@@ -1,0 +1,49 @@
+﻿@model LoginModel
+@{
+    ViewData["Title"] = "Physician Login";
+}
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = false, HeadingText = "PROVIDER PORTAL" })
+    <input type="hidden" value="@TempData["alert"]" id="hiddenAlert" />
+    <section class="col-12">
+        <div class="container-fluid">
+            <div class="row patientLogin">
+                <div class="col-md-6" style="margin-top:8px;">
+                    <img src="/Images/logo.png" />
+                </div>
+                <dssiv class="col-md-6 d-flex">
+                    <div class="patientLogInDetails">
+                        <h3 class="text-center headingText">Physician Log In</h3>
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <div class="inputControl position-relative">
+                                    <i class="fa fa-user position-absolute" aria-hidden="true"></i><input asp-for="Email" class="form-control br-0" type="text" />
+                                </div>
+                                <label>Email Address</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="inputControl position-relative">
+                                    <i class="fa fa-lock position-absolute" aria-hidden="true"></i><input asp-for="Password" class="form-control br-0" type="password" />
+                                </div>
+                                <label>Password</label>
+                            </div>
+                            <input type="hidden" asp-for="TimezoneOffSet" id="hdnTimeZone">
+                            <input type="hidden" asp-for="IsDayLightSaving" id="hdnDayLightSaving" />
+                            <button type="submit" onclick="SetTimeZone();" class="btn btn-theme btn-block">Log In</button>
+                            <a asp-action="ForGotPassword" asp-controller="Home" asp-area="PhysicianPortal">Forgot your password?</a>
+                        </form>
+                    </div>
+                </dssiv>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script src="~/JS/Login.js?v=1.0.0.1"></script>
+}
+
+
+

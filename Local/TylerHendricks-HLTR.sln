@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TylerHendricks-Web", "TylerHendricks-Web\TylerHendricks-Web.csproj", "{BCBE6AB9-79B1-4752-88AD-1F2D7D0F7387}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TylerHendricks-Core", "TylerHendricks-Core\TylerHendricks-Core.csproj", "{1E7917A6-A460-4809-9DE8-CC87E43BD897}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TylerHendricks-Data", "TylerHendricks-Data\TylerHendricks-Data.csproj", "{E76CBAC4-4E42-4D84-93BC-818557430C92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TylerHendricks-Repo", "TylerHendricks-Repo\TylerHendricks-Repo.csproj", "{B23832E7-2DA4-4FBA-9E40-EAD137E947BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TylerHendricks-Utility", "TylerHendricks-Utility\TylerHendricks-Utility.csproj", "{AD57CB5A-AD50-4486-9EC7-46161D444F44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCBE6AB9-79B1-4752-88AD-1F2D7D0F7387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBE6AB9-79B1-4752-88AD-1F2D7D0F7387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBE6AB9-79B1-4752-88AD-1F2D7D0F7387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBE6AB9-79B1-4752-88AD-1F2D7D0F7387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7917A6-A460-4809-9DE8-CC87E43BD897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7917A6-A460-4809-9DE8-CC87E43BD897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7917A6-A460-4809-9DE8-CC87E43BD897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7917A6-A460-4809-9DE8-CC87E43BD897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E76CBAC4-4E42-4D84-93BC-818557430C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E76CBAC4-4E42-4D84-93BC-818557430C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E76CBAC4-4E42-4D84-93BC-818557430C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E76CBAC4-4E42-4D84-93BC-818557430C92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B23832E7-2DA4-4FBA-9E40-EAD137E947BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B23832E7-2DA4-4FBA-9E40-EAD137E947BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B23832E7-2DA4-4FBA-9E40-EAD137E947BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B23832E7-2DA4-4FBA-9E40-EAD137E947BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD57CB5A-AD50-4486-9EC7-46161D444F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD57CB5A-AD50-4486-9EC7-46161D444F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD57CB5A-AD50-4486-9EC7-46161D444F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD57CB5A-AD50-4486-9EC7-46161D444F44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7D4D28A-2876-4B76-A522-F451D8BE6448}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs01.chetu.com/tfs/chetuprojects
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TylerHendricks-Core\\TylerHendricks-Core.csproj
+		SccProjectName1 = TylerHendricks-Core
+		SccLocalPath1 = TylerHendricks-Core
+		SccProjectUniqueName2 = TylerHendricks-Data\\TylerHendricks-Data.csproj
+		SccProjectName2 = TylerHendricks-Data
+		SccLocalPath2 = TylerHendricks-Data
+		SccProjectUniqueName3 = TylerHendricks-Repo\\TylerHendricks-Repo.csproj
+		SccProjectName3 = TylerHendricks-Repo
+		SccLocalPath3 = TylerHendricks-Repo
+		SccProjectUniqueName4 = TylerHendricks-Utility\\TylerHendricks-Utility.csproj
+		SccProjectName4 = TylerHendricks-Utility
+		SccLocalPath4 = TylerHendricks-Utility
+		SccProjectUniqueName5 = TylerHendricks-Web\\TylerHendricks-Web.csproj
+		SccProjectName5 = TylerHendricks-Web
+		SccLocalPath5 = TylerHendricks-Web
+	EndGlobalSection
+EndGlobal

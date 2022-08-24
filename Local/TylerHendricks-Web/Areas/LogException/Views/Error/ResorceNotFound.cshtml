@@ -1,0 +1,17 @@
+﻿<div class="error-container">
+    <div class="error-code">
+        @if (ViewBag.StatusCode != null)
+        {
+            @foreach (var item in ViewBag.StatusCode)
+            {
+                <span>@item</span>
+            }
+        }
+    </div>
+    <div class="error-title">ERROR</div>
+    <div class="error-message">PAGE NOT FOUND</div>
+    <div class="error-message">I think you just went to a page non-existing page.</div>
+    <div class="error-message"><a asp-action="Login" asp-controller="Home" asp-area="PatientPortal">Go To Patient Login</a></div>
+    <div class="error-message"><a asp-action="Login" asp-controller="Home" asp-area="PhysicianPortal">Go To Physician Login</a></div>
+    <div class="error-message"><a href="/">Go To Consultation</a></div>
+</div>

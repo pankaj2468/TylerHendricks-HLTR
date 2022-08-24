@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Payment failure";
+}
+
+<section class="col-12 header">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2 align-items-center">
+            <div class="col-md-12 text-center">
+                <div class="logoWrapper">
+                    <img src="~/Images/logo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col-12 d-flex justify-content-center align-items-center">
+    <div class="position-fixed w-50 orderSuccPage">
+        <h3 class="text-center payment-successful-title">Thank you for choosing Hendrx Health</h3>
+        <p class="text-center mt-3">
+          Your payment is failure
+        </p>
+        <div class="d-flex justify-content-center mt-2">
+            <a asp-action="OrderHistory" asp-controller="Patient" asp-area="PatientPortal" class=" btn blue3-btn border-0 mr-4">PROCEED TO YOUR ACCOUNT</a>
+            <a href="https://www.hendrxhealth.com" class="btn blue3-btn border-0 ml-4">BACK TO HENDRX HOME PAGE</a>
+        </div>
+    </div>
+</div>

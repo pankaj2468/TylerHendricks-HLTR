@@ -1,0 +1,117 @@
+﻿@inject IRepositoryCollection _repoCollection
+@model FinishAccountSetupModel
+@{
+    ViewData["Title"] = "AccountSetup";
+    var listState = await _repoCollection.States.GetStates();
+}
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid AccountSetup">
+            <form method="post" id="FinishAccountSetupFormhairloss">
+                <div class="row chooseMedication">
+                    <div class="col-md-12 mt-4 mb-4 text-center text-md-left pl-0">
+                        @if (ViewBag.IsHomeDelivery)
+                        {
+                            <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="SelectDeliveryOption" asp-area="PatientPortal">
+                                <img src="~/Images/arrow-alt.png" alt="">Previous
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="PharmacyInformation" asp-area="PatientPortal">
+                                <img src="~/Images/arrow-alt.png" alt="">Previous
+                            </a>
+                        }
+                    </div>
+                    <div class="col-md-12 d-flex flex-column align-items-center backgroundtheme">
+                        <h3 class="mb-5">FINISH ACCOUNT SETUP</h3>
+                        <div class="row inputFeilds">
+                            <div class="col-md-12 custom-padding">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="FirstName" type="text" />
+                                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="text-danger" asp-validation-for="AddressLine2"></span>
+                                    <label>Last Name</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="LastName" type="text" />
+                                        <span class="text-danger" asp-validation-for="LastName"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0 text-uppercase" asp-for="DateOfBirth" min="1900-01-01" max="@(DateTime.UtcNow.ToString("yyyy-MM-dd"))" placeholder="mm/dd/yyyy"/>
+                                        <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0 IsPhoneNumber" asp-for="PhoneNumber" type="tel" />
+                                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" asp-for="AddressLine1" type="text" />
+                                        <span class="text-danger" asp-validation-for="AddressLine1"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address Line 2 (optional)</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" asp-for="AddressLine2" type="text" />
+                                        <span class="text-danger" asp-validation-for="AddressLine2"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="City" type="text" />
+                                        <span class="text-danger" asp-validation-for="City"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items mView">
+                                    <div class="form-group my-wrap pl-0 pr-1 mb-2">
+                                        <label class="mb-0">State</label>
+                                        <div class="inputControl position-relative wrap">
+                                            <select class="select-state form-control br-0" onchange="FinishAccountDropdownChangeHairLoss(this)" asp-for="State" asp-items="@(new SelectList(listState,"Id","StateName"))">
+                                                <option value="0"></option>
+                                            </select>
+                                            <span class="text-danger" asp-validation-for="State"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group my-wrap pr-0 pl-1 mb-2">
+                                        <label class="mb-0">Zip Code</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" oninput="Numeric(this)" asp-for="ZipCode" type="tel" />
+                                            <span class="text-danger" asp-validation-for="ZipCode"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btnWrapper custom-padding col-12">
+                                    <div class="text-center mb-2">
+                                        <span class="text-danger" style="display:none" id="ChooseYourMedicationError">Please select any one option</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-next mb-4">NEXT</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script src="~/JS/Common.js?v=1.0.0.0"></script>
+}

@@ -1,0 +1,54 @@
+﻿@model List<NotificationView>
+@{
+    ViewData["Title"] = "Notification";
+}
+@await Component.InvokeAsync("AdminHeader", new { StaticHeading = true, HeadingText = "ADMIN CONSOLE" })
+<section class="mt-5 admin-console-table-II m-auto">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-md-12 heading-profile mt-5 ">
+            <h4 class="text-center service-state-title">
+                Notification
+            </h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="service-states-border">
+                                    <div class="d-flex justify-content-between">
+                                        <td class="service-states-table-data">@item.Title</td>
+                                        <td class="service-states-table-data">
+                                            <div class="onoffswitch" nid="@item.Id">
+                                                @if (item.Status)
+                                                {
+                                                    <input type="checkbox" name="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" class="onoffswitch-checkbox" id="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" checked="checked" hidden="hidden">
+                                                    <label class="onoffswitch-label" for="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" onclick="changeToogleOnOff(this)">
+                                                        <span class="onoffswitch-inner">ACTIVE</span>
+                                                        <span class="onoffswitch-switch switch-right-on"></span>
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" class="onoffswitch-checkbox" id="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" hidden="hidden">
+                                                    <label class="onoffswitch-label" for="@string.Concat(item.Title.Replace(" ","-"),"-",item.Id)" onclick="changeToogleOnOff(this)">
+                                                        <span class="onoffswitch-inner switch-off">INACTIVE</span>
+                                                        <span class="onoffswitch-switch switch-right-off"></span>
+                                                    </label>
+                                                }
+                                            </div>
+                                        </td>
+                                    </div>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/JS/Notification.js?v=0.0.0.0"></script>
+}

@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Database";
+}
+@await Component.InvokeAsync("AdminHeader", new { StaticHeading = true, HeadingText = "ADMIN CONSOLE" })
+@section Styles {
+    <link href="~/twitter-bootstrap/css/daterangepicker.css" rel="stylesheet" />
+    <link href="~/twitter-bootstrap/css/admin-portal.css" rel="stylesheet" />
+}
+<section class="col-md-12 mt-5">
+    <form method="post">
+        <div class="tab">
+            <button type="button" class="tablinks active" onclick="openCity(event, 'PaymentApproved')">Payment</button>
+            <button type="button" class="tablinks" onclick="openCity(event, 'Weekly')">Initial Registration</button>
+        </div>
+        <div id="PaymentApproved" class="tabcontent" style="display:block;">
+            <div class="row">
+                <div class="col-sm-2 col-md-3">
+                    <input type="radio" value="0" class="payment-filter" name="paymentFilter" checked /> Approved
+                    <input type="radio" value="3" class="payment-filter" name="paymentFilter" /> Pending
+                </div>
+                <div class="col-sm-2 offset-md-7 col-md-2 text-right">
+                    <a asp-action="PatientDataExcel" asp-controller="Home" asp-area="AdminPortal" asp-route-FilterMode="0" class="btn-font s-center btn-export-to-excel">Export To Excel</a>
+                </div>
+            </div>
+            <div class="row" id="FilterControls1">
+                <div class="col-sm-2 col-md-3">
+                    <input type="radio" value="0" name="filter" checked /> All
+                    <input type="radio" value="1" name="filter" /> Checked
+                    <input type="radio" value="2" name="filter" /> Unchecked
+                </div>
+            </div>
+            <div class="row" id="FilterControls2" style="display:none;">
+                <div class="col-sm-2 col-md-6 d-flex align-items-center">
+                    <div class="w-30 mr-2 ">
+                        <label for="reportrangePayment">Select Date Range:</label>
+                    </div>
+                    <div class="w-75">
+                        <div id="reportrangePayment" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 75%">
+                            <i class="fa fa-calendar"></i>&nbsp;
+                            <span></span> <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-auto">
+                <table id="tablePatientInfo" class="table table-striped table-bordered mt-2">
+                    <thead>
+                        <tr>
+                            <th class="patient-info-heading">MDToolbox?</th>
+                            <th class="patient-info-heading">First Name</th>
+                            <th class="patient-info-heading">Last Name</th>
+                            <th class="patient-info-heading">Email</th>
+                            <th class="patient-info-heading">Registered Date</th>
+                            <th class="patient-info-heading">Submitted Date</th>
+                            <th class="patient-info-heading p-0">Address 1</th>
+                            <th class="patient-info-heading p-0">Address 2</th>
+                            <th class="patient-info-heading p-0">City</th>
+                            <th class="patient-info-heading p-0">State</th>
+                            <th class="patient-info-heading p-0">Zip</th>
+                            <th class="patient-info-heading p-0">Date of Birth</th>
+                            <th class="patient-info-heading p-0">Patient Phone</th>
+                            <th class="patient-info-heading p-0">Pharm name </th>
+                            <th class="patient-info-heading p-0">Pharm Address 1</th>
+                            <th class="patient-info-heading p-0">Pharm Address 2</th>
+                            <th class="patient-info-heading p-0">Pharm City</th>
+                            <th class="patient-info-heading">Pharm State</th>
+                            <th class="patient-info-heading">Pharm Zip</th>
+                            <th class="patient-info-heading">Pharm Phone</th>
+                            <th class="patient-info-heading" style="background: #5bc0be;">Product Price</th>
+                            @*<th class="patient-info-heading ">Product Price</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="Weekly" class="tabcontent" style="display:none;">
+            <div class="row">
+                <div class="col-sm-2 col-md-6 d-flex align-items-center">
+                    <div class="w-30 mr-2">
+                        <label for="reportrange">Select Date Range:</label>
+                    </div>
+                    <div class="w-75">
+                        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 75%">
+                            <i class="fa fa-calendar"></i>&nbsp;
+                            <span></span> <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 offset-md-4 col-md-2 text-right">
+                    <a asp-action="PatientInitialRegister" asp-controller="Home" asp-area="AdminPortal" class="btn-font s-center btn-export-to-excel">Export To Excel</a>
+                </div>
+            </div>
+            <div class="overflow-auto">
+                <table id="tablePatientInitialRegistration" class="table table-striped table-bordered mt-2 w-100">
+                    <thead>
+                        <tr>
+                            <th class="patient-info-heading">First Name</th>
+                            <th class="patient-info-heading">Last Name</th>
+                            <th class="patient-info-heading">Email</th>
+                            <th class="patient-info-heading">Submitted Date</th>
+                            <th class="patient-info-heading">Question Naire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <script src="~/jquery/moment.min.js"></script>
+    <script src="~/jquery/daterangepicker.min.js"></script>
+    <script src="~/JS/PatientInfo.js?v=1.0.0.1"></script>
+}

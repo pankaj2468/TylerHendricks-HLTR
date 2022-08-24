@@ -1,0 +1,136 @@
+﻿@inject IRepositoryCollection _repoColl
+@model QuestionNaireStep
+@{
+    ViewData["Title"] = "Medication";
+    var consultationMedicationList = (await _repoColl.Patients.GetMedications((int)ConsultationType.ErectileDysfunction)
+        .ConfigureAwait(true)).OrderBy(x=>x.Priority).ToList();
+}
+<style>
+    .hidden {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    input[type=radio] + label {
+        color: #ccc;
+        font-style: normal;
+    }
+
+    input[type=radio]:checked + label {
+        color: #fff !important;
+        background-color: #5bc0be !important;
+        font-style: normal;
+    }
+
+    .ckbox-button {
+        height: 26px;
+        text-align: center;
+        font-style: normal !important;
+        background: #1c2541;
+        color: #fff !important;
+        font-weight: bold;
+        border-radius: 2px;
+        text-transform: uppercase;
+        padding: 2px 1rem;
+        line-height: 1.5;
+    }
+</style>
+<div id="UpdateContentDiv" class="choose-medication-background w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid">
+            <form method="post" id="formChooseYourMedication" class="formChooseMedicationStep1">
+                <div class="row chooseMedication custom-med">
+                    <input type="text" id="hdnMedicationId" asp-for="Id" class="input-hidden"/>
+                    <div class="col-md-12 mt-4 text-center text-md-left pl-0">
+                        <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="PreviousMove" asp-area="PatientPortal">
+                            <img src="~/Images/arrow-alt.png" /> Previous
+                        </a>
+                        <h2 class="text-center medication-heading mt-2">CHOOSE YOUR MEDICATION</h2>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6 medication-mobile d-flex flex-column align-items-center">
+                        <h4 class="mt-5">Sildenafil (Viagra)</h4>
+                        <div class="choose-medication-height">
+                            <p>(Taken as needed and is effective within 30 minutes)</p>
+                        </div>
+                        <a class="medication-link" href="https://www.hendrxhealth.com/important-safety-information-sildenafil" target="_blank">Click here for more info</a>
+                        <div class="selectWrap d-flex justify-content-between align-content-center">
+                            @{ int i = 0; }
+                            @foreach (var item in consultationMedicationList.Take(4))
+                            {
+                                if (i == 3)
+                                {
+                                    if (ViewBag.MediFlag.ToUpper() == "YES")
+                                    {
+                                        <div class="box">
+                                            <div class="tabDose">
+                                                <p><b>@item.MedicationName.Replace("Sildenafil", "")</b></p>
+                                            </div>
+                                            <input type="radio" class="hidden chooseMedication" data-value="@item.MedicationId" name="cb" id="ChooseYourMedication@(item.MedicationId)">
+                                            <label for="ChooseYourMedication@(item.MedicationId)" class="btn btn-block ckbox-button">select</label>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="box">
+                                        <div class="tabDose">
+                                            <p><b>@item.MedicationName.Replace("Sildenafil", "")</b></p>
+                                        </div>
+                                        <input type="radio" class="hidden chooseMedication" data-value="@item.MedicationId" name="cb" id="ChooseYourMedication@(item.MedicationId)">
+                                        <label for="ChooseYourMedication@(item.MedicationId)" class="btn btn-block ckbox-button">select</label>
+                                    </div>
+                                }
+                                i++;
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6 medication-mobile-2 d-flex flex-column align-items-center">
+                        <h4 class="mt-5">Tadalafil (Cialis)</h4>
+                        <div class="choose-medication-height">
+                            <p>(Taken daily and is effective all day)</p>
+                        </div>
+                        <a class="medication-link-2" href="https://www.hendrxhealth.com/important-safety-information-tadalafil" target="_blank">Click here for more info</a>
+                        <div class="selectWrap d-flex justify-content-between align-content-center">
+                            @{ int j = 0; }
+                            @foreach (var item in consultationMedicationList.Skip(4))
+                            {
+                                if (j == 3)
+                                {
+                                    if (ViewBag.MediFlag.ToUpper() == "YES")
+                                    {
+                                        <div class="box">
+                                            <div class="tabDose">
+                                                <p><b>@item.MedicationName.Replace("Tadalafil", "")</b></p>
+                                            </div>
+                                            <input type="radio" class="hidden chooseMedication" data-value="@item.MedicationId" name="cb" id="ChooseYourMedication@(item.MedicationId)">
+                                            <label for="ChooseYourMedication@(item.MedicationId)" class="btn btn-block ckbox-button">select</label>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="box">
+                                        <div class="tabDose">
+                                            <p><b>@item.MedicationName.Replace("Tadalafil", "")</b></p>
+                                        </div>
+                                        <input type="radio" class="hidden chooseMedication" data-value="@item.MedicationId" name="cb" id="ChooseYourMedication@(item.MedicationId)">
+                                        <label for="ChooseYourMedication@(item.MedicationId)" class="btn btn-block ckbox-button">select</label>
+                                    </div>
+                                }
+                                j++;
+                            }
+                        </div>
+                    </div>
+                    <div class="btnWrapper custom-padding col-12 mt-5">
+                        <div class="text-center mb-2">
+                            <span asp-validation-for="Id" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-next">NEXT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

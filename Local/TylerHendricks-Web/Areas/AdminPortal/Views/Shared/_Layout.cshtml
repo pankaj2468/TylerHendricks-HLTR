@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="googlebot" content="noindex">
+    <title>@ViewData["Title"] - Hendrx Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link href="~/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/twitter-bootstrap/css/style.css?v=1.1.0.5.1.0.2.1.1.1" rel="stylesheet" />
+    <link href="~/twitter-bootstrap/css/responsive.css?v=1.0.0.1.1" rel="stylesheet" />
+    <link href="~/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+    <script src="~/jquery/jquery.js"></script>
+</head>
+<body>
+    <partial name="_Loader" />
+    <div class="container-fluid QnAPage">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/jquery-validate/jquery.validate.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/twitter-bootstrap-JS/bootstrap.min.js"></script>
+    <script src="~/datatables/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var AdminPortalUrl = {
+            ChangeMDToolBoxUrl: '@Url.Action("ChangeMDToolBox", "Home", new { area = PortalType.AdminPortal.ToString() })',
+            ActiveInActiveStateUrl: '@Url.Action("ActiveInActiveState", "Home", new { area = PortalType.AdminPortal.ToString() })',
+            GetPatientRecordUrl: '@Url.Action("GetPatientRecords", "Home", new { area = PortalType.AdminPortal.ToString() })',
+            GetPatientRecordInitialUrl: '@Url.Action("GetPatientInitialRegister", "Home", new { area = PortalType.AdminPortal.ToString() })',
+            ActiveInActiveConsultationUrl: '@Url.Action("ActiveInActiveConsultation", "Home", new { area = PortalType.AdminPortal.ToString() })',
+            ActiveInActiveNotificationUrl: '@Url.Action("ActiveInActiveNotification", "Home", new { area = PortalType.AdminPortal.ToString() })',
+        };
+    </script>
+    <script>
+        $(function () {
+            MenuTabSelect();
+        });
+        function MenuTabSelect() {
+            let url = window.location.pathname;
+            if (url.toLowerCase().indexOf('state') != -1) {
+                $('#headerdiv').children().removeClass('database-btn').addClass('consultation-btn');
+                $('#headerdiv').find('a:nth-child(4)').removeClass('consultation-btn').addClass('database-btn');
+            } else if (url.toLowerCase().indexOf('notification') != -1) {
+                $('#headerdiv').children().removeClass('database-btn').addClass('consultation-btn');
+                $('#headerdiv').find('a:nth-child(3)').removeClass('consultation-btn').addClass('database-btn');
+            } else if (url.toLowerCase().indexOf('consultation') != -1) {
+                $('#headerdiv').children().removeClass('database-btn').addClass('consultation-btn');
+                $('#headerdiv').find('a:nth-child(2)').removeClass('consultation-btn').addClass('database-btn');
+            } else if (url.toLowerCase().indexOf('patientinfo') != -1) {
+                $('#headerdiv').children().removeClass('database-btn').addClass('consultation-btn');
+                $('#headerdiv').find('a:nth-child(1)').removeClass('consultation-btn').addClass('database-btn');
+            }
+
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

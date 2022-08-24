@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "PaymentSuccess";
+}
+<section class="col-12 header">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2 align-items-center">
+            <div class="col-md-12 text-center">
+                <div class="logoWrapper">
+                    <img src="~/Images/logo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row payment-background mx-0">
+    <div class="col-12 h-100" id="orderSuccessPaymentPage">
+        <div class="position-fixed w-50 bg-white p-4 orderSuccPage">
+            <p>
+                Thank you for your payment.
+            </p>
+            <p>
+                Return to your account to start a new message.
+            </p>
+            <p>
+                <a class="themecolor1 text-uppercase" asp-action="Messages" asp-controller="Patient" asp-area="PatientPortal">Return To Account</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            UpdateSession();
+        });
+        function UpdateSession() {
+            let date = new Date();
+            let timeZoneoff = date.getTimezoneOffset();
+            $.ajax({
+                type: 'POST',
+                url: '' + PatientPortalUrl.SetSesstionUrl + '',
+                data: { timeZone: timeZoneoff },
+                dataType: 'json',
+                async: true,
+                beforeSend: function () { },
+                complete: function () { },
+                success: function (response) { },
+                error: function () { }
+            });
+        }
+    </script>
+}

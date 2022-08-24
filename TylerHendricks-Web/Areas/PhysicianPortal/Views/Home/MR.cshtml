@@ -1,0 +1,650 @@
+﻿@{
+    ViewData["Title"] = "Patient Chart";
+}
+@await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = true, HeadingText = "PHYSICIAN DASHBOARD" })
+<section class=" mx-auto ques-width my-5">
+    <div class=" d-flex justify-content-center align-items-center flex-column">
+        <h4 class="text-center modal-consultation-type-heading">MANUAL PATIENT INTAKE</h4>
+        <div class="select mt-3 questionairee-select-width">
+            <select class="form-control md-unit list-medication hide-select">
+                <option selected>Hair Loss</option>
+                <option value="1">HA</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select><div class="custom-select">Refill</div>
+        </div>
+
+    </div>
+    <div class="row border d-flex  align-items-center mt-3">
+        <div class="col-lg-8">
+            <p class="mb-0">In which state you are currently?</p>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+            <div class="select w-100">
+                <select class="form-control md-unit list-medication hide-select">
+                    <option selected>Select State</option>
+                    <option value="1">HA</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select><div class="custom-select">Select State</div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you between the ages of 18-75?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Patient email address:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <input type="text" id="username" name="username" class="w-100 form-control br-0">
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Do you need a medication refilled?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you experiencing any abnormal symptoms?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you currently taking this medication?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you having any problems or side effects from your medication?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Have you been taking the requested medication at the same dosage for more than 90 days?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Do you agree with the following?</p>
+
+            <ol class="pr-0 ">
+                <li>
+                    You will provide a photo of your recent medication bottle, or a photo
+                    <br>of a recent medication list from your pharmacy. This bottle/document
+                    <br>must be less than one year old, and less than 30 days out of date.
+                </li>
+                <li>
+                    You understand you will only be allowed to refill this medication one
+                    <br>time within the calendar year at Hendrx Health.
+                </li>
+                <li>You will follow up with a primary care provider after this visit.</li>
+            </ol>
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Have you been taking the requested medication at the same dosage for more than 90 days?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Please provide the following information for your requested medication, as listed on your current medication bottle:</p>
+            <ol class="pr-0 ">
+                <li>
+                    You will provide a photo of your recent medication bottle, or a photo
+                    <br>of a recent medication list from your pharmacy. This bottle/document
+                    <br>must be less than one year old, and less than 30 days out of date.
+                </li>
+                <li>
+                    You understand you will only be allowed to refill this medication one
+                    <br>time within the calendar year at Hendrx Health.
+                </li>
+                <li>You will follow up with a primary care provider after this visit.</li>
+            </ol>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div id="DivAddDynamicMedicationInDose">
+                <div class="d-flex align-items-start justify-content-around flex-wrap flex-lg-nowrap feilds mb-2 medicationdiv flex-column">
+                    <div class="formWrap w-100">
+                        <div class="select"><select id="ddlmedicationcategory" class="ddlmedicationcategory hide-select"><option value="0">Select a medication category</option><option value="1">Acne / Anti-aging</option><option value="2">Allergies</option><option value="3">Asthma/COPD</option><option value="4">Birth Control</option><option value="5">Depression / Anxiety</option><option value="6">Diabetes</option><option value="7">Eczema</option><option value="8">Gastric Reflux / GERD</option><option value="9">Hair Loss</option><option value="10">Herpes</option><option value="11">High blood pressure / Hypertension</option><option value="12">High cholesterol or Triglycerides / Hyperlipidemia</option><option value="13">Insomnia</option><option value="14">Men’s Health</option><option value="15">Migraine / Chronic headaches</option><option value="16">Osteoarthritis</option><option value="17">PrEP</option><option value="18">Thyroid disease</option></select><div class="custom-select">Select a medication category</div><ul class="select-options" style="display: none;"><li rel="0">Select a medication category</li><li rel="1">Acne / Anti-aging</li><li rel="2">Allergies</li><li rel="3">Asthma/COPD</li><li rel="4">Birth Control</li><li rel="5">Depression / Anxiety</li><li rel="6">Diabetes</li><li rel="7">Eczema</li><li rel="8">Gastric Reflux / GERD</li><li rel="9">Hair Loss</li><li rel="10">Herpes</li><li rel="11">High blood pressure / Hypertension</li><li rel="12">High cholesterol or Triglycerides / Hyperlipidemia</li><li rel="13">Insomnia</li><li rel="14">Men’s Health</li><li rel="15">Migraine / Chronic headaches</li><li rel="16">Osteoarthritis</li><li rel="17">PrEP</li><li rel="18">Thyroid disease</li></ul></div> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+                    <div class="formWrap w-100 ">
+                        <div class="select"><select id="ddlselectmedication" class="ddlmedicationcategory hide-select"><option value="0">Select a medication</option></select><div class="custom-select">Select a medication</div><ul class="select-options" style="display:none"><li rel="0">Select a medication</li></ul></div><span class="text-danger" style="display:none">Required</span> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+                    <div class="formWrap w-100">
+                        <input class="form-control md-dose mr-medi-dosage" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Enter dosage"> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+                    <div class="formWrap w-100">
+                        <div class="select"><select class="form-control md-unit hide-select"><option value="0">Unit</option><option value="1">%</option><option value="2">grams</option><option value="3">IU</option><option value="4">mcg</option><option value="5">mg</option><option value="6">mg/ml</option><option value="7">ml</option><option value="8">units</option></select><div class="custom-select">Unit</div><ul class="select-options" style="display:none"><li rel="0">Unit</li><li rel="1">%</li><li rel="2">grams</li><li rel="3">IU</li><li rel="4">mcg</li><li rel="5">mg</li><li rel="6">mg/ml</li><li rel="7">ml</li><li rel="8">units</li></ul></div> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+                    <div class="formWrap w-100 ">
+                        <div class="select"><select class="form-control md-form hide-select"><option value="0">Form</option><option value="1">capsule</option><option value="2">cream</option><option value="3">drops</option><option value="4">liquid</option><option value="5">ointment</option><option value="6">puffs</option><option value="7">spray</option><option value="8">units</option><option value="9">powder</option><option value="10">tablet</option></select><div class="custom-select">Form</div><ul class="select-options" style="display:none"><li rel="0">Form</li><li rel="1">capsule</li><li rel="2">cream</li><li rel="3">drops</li><li rel="4">liquid</li><li rel="5">ointment</li><li rel="6">puffs</li><li rel="7">spray</li><li rel="8">units</li><li rel="9">powder</li><li rel="10">tablet</li></ul></div> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+                    <div class="formWrap w-100">
+                        <div class="select"><select class="form-control md-frequency hide-select"><option value="0">Frequency</option><option value="1">once daily</option><option value="2">twice daily</option><option value="3">three times daily</option><option value="4">four times daily</option><option value="5">six times daily</option><option value="6">weekly</option><option value="7">as needed</option><option value="8">nightly</option></select><div class="custom-select">Frequency</div><ul class="select-options" style="display:none"><li rel="0">Frequency</li><li rel="1">once daily</li><li rel="2">twice daily</li><li rel="3">three times daily</li><li rel="4">four times daily</li><li rel="5">six times daily</li><li rel="6">weekly</li><li rel="7">as needed</li><li rel="8">nightly</li></ul></div> <span class="text-danger" style="display:none;">Required</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0"> Please list your previous surgeries or hospitalizations. If not applicable, click next.</p>
+
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <textarea id="txthairlossallergies_textarea" class="allergy-textarea"></textarea>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Please list your allergies / reactions. If not applicable, click next.</p>
+        </div>
+
+
+
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <textarea id="txthairlossallergies_textarea" class="allergy-textarea"></textarea>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you pregnant, or is there any chance you could be pregnant?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No/Not Applicable
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+            
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+
+            <p>Do any of the following currently apply to you?</p>
+            <p class="mb-0">Breastfeeding</p>
+            <p class="mb-0">Bloody stool (poop) or black tarry stool</p>
+            <p class="mb-0">Chest pain</p>
+            <p class="mb-0">Dizziness</p>
+            <p class="mb-0">Inability to urinate</p>
+            <p class="mb-0">Lightheadedness</p>
+            <p class="mb-0">Nausea</p>
+            <p class="mb-0">Personal or family history of irregular heartbeats (arrhythmia) such as QT prolongation</p>
+            <p class="mb-0">Recently in the hospital</p>
+            <p class="mb-0">Shortness of breath</p>
+            <p class="mb-0">Suicidality or feeling like hurting yourself</p>
+            <p class="mb-0">Unprovoked weight loss or losing weight for no reason</p>
+            <p class="mb-0">Vomiting</p>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">By proceeding with this consultation you agree to the following:</p>
+            <ol>
+                <li>You have answered all the above questions accurately and truthfully.</li>
+                <li>
+                    You understand our providers take your answers in good faith and base their
+                    <br>prescribing decisions accordingly, and that incorrect information can be hazardous to your health.
+                </li>
+            </ol>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height  pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">
+                Please upload a photo of your recent medication bottle, or listing from a pharmacy.
+                This bottle/document must be less than one year old, and less than 30 days out of date.
+
+            </p>
+            <i>You can upload up to 3 photos</i>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed1')">
+                        <i class="fa fa-plus" id="medSelection1" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview1">
+                    </div>
+                    <input type="file" id="fuploadMed1" onchange="fileValidateMed(this,'RxPreview1','medSelection1')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed2')">
+                        <i class="fa fa-plus" id="medSelection2" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview2">
+                    </div>
+                    <input type="file" id="fuploadMed2" onchange="fileValidateMed(this,'RxPreview2','medSelection2')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed3')">
+                        <i class="fa fa-plus" id="medSelection3" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview3">
+                    </div>
+                    <input type="file" id="fuploadMed3" onchange="fileValidateMed(this,'RxPreview3','medSelection3')" accept="image/*" hidden="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">
+                Please upload a photo of your recent medication bottle, or listing from a pharmacy.
+                This bottle/document must be less than one year old, and less than 30 days out of date.
+
+            </p>
+            <i>You can upload up to 3 photos</i>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed1')">
+                        <i class="fa fa-plus" id="medSelection1" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview1">
+
+                    </div>
+                    <input type="file" id="fuploadMed1" onchange="fileValidateMed(this,'RxPreview1','medSelection1')" accept="image/*" hidden="">
+                    <p class="mb-0">Selfie Photo</p>
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed2')">
+                        <i class="fa fa-plus" id="medSelection2" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview2">
+
+                    </div>
+                    <input type="file" id="fuploadMed2" onchange="fileValidateMed(this,'RxPreview2','medSelection2')" accept="image/*" hidden="">
+                    <p class="mb-0">Photo Id<p>
+                </div>
+                <div class="col-4">
+                    @*<div class="square" onclick="openFileDialog('#fuploadMed3')">
+                            <i class="fa fa-plus" id="medSelection3" aria-hidden="true"></i>
+                            <img class="tri-image hide-select" src="" id="RxPreview3">
+                        </div>*@
+                    <input type="file" id="fuploadMed3" onchange="fileValidateMed(this,'RxPreview3','medSelection3')" accept="image/*" hidden="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Pharmacy Information:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <form>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy name"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy phone number"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy address line 1"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy address line 2(optional)"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="city"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select class="form-control md-unit list-medication hide-select">
+                            <option selected>Select Consultation Type</option>
+                            <option value="1">HA</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select><div class="custom-select">State</div>
+                    </div>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy zip code"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+
+
+            </form>
+
+
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Finish Account Setup</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <form>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="First name"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Last name"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control br-0 text-uppercase mb-2" type="date" data-val="true" data-val-required="Required" id="DateOfBirth" name="DateOfBirth" value="">
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Phone number"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Address line 1"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Address line 2 (optional)"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="city"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+
+
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select class="form-control md-unit list-medication hide-select">
+                            <option selected>Select Consultation Type</option>
+                            <option value="1">HA</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select><div class="custom-select">State</div>
+                    </div>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy zip code"> <span class="text-danger" style="display: none;">Required</span>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">When did you first notice you were experiencing hair loss?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group">
+
+                <label class="control control--checkbox">
+                    <b>$30:</b> Physician Consult
+
+                    +
+
+                    Prescription
+
+                    (30 day supply)
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+
+
+                <label class="control control--checkbox ">
+                    <b>$40:</b> Physician Consult
+
+                    +
+
+                    Prescription
+
+                    (30 day supply)
+
+                    +
+
+                    1 refill
+
+                    (30 day supply)
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ">
+                    <b>$50:</b>Physician Consult
+
+                    +
+
+                    Prescription
+
+                    (30 day supply)
+
+                    +
+
+                    2 refills
+
+                    (30 day supply each)
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    
+   
+    <div class=" d-flex align-items-center justify-content-center ">
+
+        <button class="btn btn-primary my-2 br-0 btn-theme2">CREATE PATIENT CHART</button>
+
+
+    </div>
+</section>
+

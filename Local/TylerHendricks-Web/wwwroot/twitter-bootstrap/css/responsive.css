@@ -1,0 +1,38 @@
+@media screen and (min-width: 1800px){
+    html{
+        font-size: 120%;
+    }
+    .container {
+        max-width: 1750px;
+    }
+}
+@media screen and (max-width: 480px){
+    .container.d-flex.justify-content-between.align-items-center {}
+
+    .header .container {
+        flex-direction: column;
+    }
+
+    .logoWrapper {
+      /*  margin-bottom: 1rem;*/
+        text-align:center;
+    }
+
+    .rightContent {
+        margin-bottom: 2rem;
+    }
+
+    img.sideImgWrapper {
+        margin-bottom: 2rem;
+    }
+
+    .imgGridViewer {
+        width: 50%;
+        margin-bottom: 1rem;
+    }
+    .menuRight{
+       /* text-align:center;
+        margin-top:15px;*/
+       display:none;
+    }
+}

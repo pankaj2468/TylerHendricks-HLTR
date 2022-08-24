@@ -1,0 +1,141 @@
+﻿<section class="col-12 header">
+    <div class="container-fluid nav-bar">
+        <div class="row nav-mobile align-items-center justify-content-between">
+            <div class="col-lg-4 col-md-4 mb-3 d-none d-md-block">
+                <div class="logoWrapper ">
+                    <a href="http://hendrxhealth.com/" target="_blank" title="Hendrx Health">
+                        <img src="~/Images/logo.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-3   text-center d-none d-md-block">
+                @if (Convert.ToBoolean(ViewBag.ShowQuestions))
+                {
+                    if (ViewBag.QuestionId != 19 && ViewBag.QuestionId != 43 && ViewBag.QuestionId != 60)
+                    {
+
+                    }
+                }
+                else if (Convert.ToBoolean(ViewBag.StaticHeading))
+                {
+                    <div>
+                        <p class="themeColor fs-18 mb-0"><b><h4 style="color: #5bc0be; font-size:22px;">@ViewBag.HeadingText</h4></b></p>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-5 nav-wrapper">
+                @if (Convert.ToBoolean(ViewBag.ShowRightSection))
+                {
+                    <div class="menuRight mb-3">
+                        <button class="btn btn-custom btn-start">START CONSULTATION</button>
+                        <button class="btn btn-no-style">LOG IN</button>
+                    </div>
+                }
+                @if (ViewBag.userName != null)
+                {
+                    if (ViewBag.ConsultationStatus)
+                    {
+                        <div class="user-sec d-none d-md-block">
+                            <div class="btn-group mb-1">
+                                <div class="d-flex justify-content-end">
+                                    <div>
+
+
+                                        <span class="user-txt">
+                                            Welcome, @ViewBag.userName
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a asp-action="LogOut" asp-area="PatientPortal" asp-controller="Patient" class="logout-txt ml-4">Log out</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="header-btns d-flex justify-content-end" id="headerdiv">
+                                <a class="sky-btn" onclick="MenuTabSelect()" asp-action="OrderHistory" asp-controller="Patient" asp-area="PatientPortal">Requests</a>
+                                <a class="blue2-btn" onclick="MenuTabSelect()" asp-action="Messages" asp-controller="Patient" asp-area="PatientPortal">Messages</a>
+                                <a class="blue2-btn" onclick="MenuTabSelect()" asp-action="Profile" asp-controller="Patient" asp-area="PatientPortal">Profile</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="menuRight mb-3">
+                            <p class="mr-2">Welcome, <span>@ViewBag.userName</span></p>
+                            <span>
+                                <a asp-action="LogOut" asp-area="PatientPortal" asp-controller="Patient" style="color: #1C2541"><b>LOG OUT</b></a>
+                            </span>
+                        </div>
+                    }
+                }
+                <nav class="d- block text-center d-md-none navbar d-flex justify-content-between toggle-navbar navbar-expand-lg navbar-light custom-padding nav-margin">
+                    <div class="col-md-12">
+                        <a class="navbar-brand logoWrapper" href="http://hendrxhealth.com/" target="_blank" title="Hendrx Health"> <img src="~/Images/logo.png"></a>
+                    </div>
+                    @if (ViewBag.userName != null)
+                    {
+                        <button class="navbar-toggler custom-padding bg-toggle" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <div class="hamburger" id="hamburger-1">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </div>
+                        </button>
+                        <div class="collapse shadow-sm nav-position nav-background navbar-collapse mt-3" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#"> <p class="mb-0">Welcome, <span>@ViewBag.userName</span></p> <span class="sr-only">(current)</span></a>
+                                </li>
+                                @if (ViewBag.ConsultationStatus)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-profile-header " asp-action="OrderHistory" asp-controller="Patient" asp-area="PatientPortal" style="color: #1C2541"><b>Requests</b></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-profile-header" asp-action="Messages" asp-controller="Patient" asp-area="PatientPortal" style="color: #1C2541"><b>Messages</b></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-profile-header" asp-action="Profile" asp-controller="Patient" asp-area="PatientPortal" style="color: #1C2541"><b>Profile</b></a>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="LogOut" asp-area="PatientPortal" asp-controller="Patient" style="color: #1C2541"><b>LOG OUT</b></a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                </nav>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.userName != null)
+    {
+        if (ViewBag.ConsultationStatus)
+        {
+            <div class="border-header d-none d-md-block"></div>
+        }
+    }
+</section>
+<style>
+    .nav-mobile .btn-group {
+        display: contents;
+    }
+</style>
+<!-- Modal -->
+
+<script>
+    $(document).ready(function () {
+
+        $('[rel="tooltip"]').tooltip();
+
+        $(".hamburger").click(function () {
+            $(this).toggleClass("is-active");
+        });
+
+    });
+</script>
+<style>
+    label.form-label {
+        color: #000;
+        display: block;
+    }
+</style>

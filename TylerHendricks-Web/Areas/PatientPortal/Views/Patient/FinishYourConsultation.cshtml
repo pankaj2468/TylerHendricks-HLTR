@@ -1,0 +1,57 @@
+﻿@model SessionManager
+@{
+    ViewData["Title"] = "Finish Your Consultation";
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+
+<section class="col-12">
+    <div class="container">
+        <div class="row mainQs">
+            <div class="col-12 d-flex align-items-center flex-column">
+                <form method="post">
+                    <input type="hidden" id="hidConsultationId" asp-for="ConsultationCategoryId" />
+                    <div class="d-flex justify-content-around flex-column mt-5 pt-5">
+                        <h2 class="text-center font-weight-bold pb-4" style="color: #16213f">CHOOSE YOUR CONSULTATION TYPE</h2>
+                    </div>
+                    <div class="category-button">
+                        <div class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn">
+                            <button type="submit" onclick="SetConsulationType(3)" class="consultant-type">
+                                <img src="/Images/user.png" class="img-consultanttype" />
+                                HAIR LOSS
+                            </button>
+                        </div>
+                        <div class="hide-select">
+                            <span class="text-danger font-12">Not eligible for a new hair loss consultation unti mm/dd/yy</span>
+                        </div>
+                        <br />
+                        <div class="btn-theme2 btn-block btn-height60 bg-golden home-btn">
+                            <button type="submit" onclick="SetConsulationType(2)" class="consultant-type">
+                                <img src="/Images/medication.png" class="img-consultanttype" />
+                                MEDICATION REFILL
+                            </button>
+                        </div>
+                        <div class="hide-select">
+                            <span class="text-danger font-12">Not eligible for a new medical refill consultation unti mm/dd/yy</span>
+                        </div>
+                        <br />
+                        <div class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn">
+                            <button type="submit" onclick="SetConsulationType(1)" class="consultant-type">
+                                <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                ERECTILE DYSFUNCTION
+                            </button>
+                        </div>
+                        <div class="hide-select">
+                            <span class="text-danger font-12">Not eligible for a new erectile dysfunction consultation unti mm/dd/yy</span>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <div>
+                            <p><a asp-area="PatientPortal" asp-controller="Patient" asp-action="orderhistory" class="">Click here</a> to be redirected to your patient account.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

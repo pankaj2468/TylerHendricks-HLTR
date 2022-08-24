@@ -1,0 +1,88 @@
+﻿@model IEnumerable<OrderHistoryModel>
+@{
+    ViewData["Title"] = "Requests";
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+
+<section class="order-table-history mt-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-12 p-0 heading-profile mx-auto overflow-auto">
+            <h2>MY REQUESTS</h2>
+            <a asp-area="PatientPortal" asp-controller="Home" asp-action="Index" class="new-consultation"> Start a new consultation</a>
+            <div class="d-md-block d-none">
+                <table class="mt-5 table-data">
+                    <tr>
+                        <td class="order-table-heading">Request</td>
+                        <td class="order-table-heading">Status</td>
+                        <td class="order-table-heading">Date Requested</td>
+                        <td class="order-table-heading">Date Prescribed</td>
+                        <td class="order-table-heading"># Refills</td>
+                        <td class="order-table-heading">Payment</td>
+                        <td class="order-table-heading">Pharmacy</td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-tr">
+                            <td>@item.Request</td>
+                            <td>@item.Status</td>
+                            <td>@item.RequestedDate</td>
+                            <td>@item.PrescribeDate</td>
+                            <td>@item.Refills</td>
+                            <td>$@item.Payments</td>
+                            <td>
+                                @item.PharmacyName<br />
+                                @Html.Raw(item.PharmacyPhone)<br />
+                                @Html.Raw(item.PharmacyAddress)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 d-md-none d-block">
+                        <div class="card mt-5">
+                            <div class="card-body br-0 card-border">
+                                <table>
+                                    <tr>
+                                        <td class="request-table">Request: </td>
+                                        <td class="request-table-II">@item.Request</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table">Status: </td>
+                                        <td class="request-table-II">@item.Status</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table">Date Requested: </td>
+                                        <td class="request-table-II">@item.RequestedDate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table">Date Prescribed: </td>
+                                        <td class="request-table-II">@item.PrescribeDate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table"># Refills: </td>
+                                        <td class="request-table-II">@item.Refills</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table">Payment: </td>
+                                        <td class="request-table-II">$@item.Payments</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-table">Pharmacy: </td>
+                                        <td class="request-table-II">
+                                            @item.PharmacyName<br />
+                                            @Html.Raw(item.PharmacyPhone)<br />
+                                            @Html.Raw(item.PharmacyAddress)
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+</section>
+

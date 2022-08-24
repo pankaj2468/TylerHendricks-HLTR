@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Payment Response";
+}
+
+<section class="col-12 header position-fixed">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2 align-items-center">
+            <div class="col-md-12 text-center">
+                <div class="logoWrapper mb-2">
+                    <img src="~/Images/logo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!---->
+<div class="mx-auto container-fluid">
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-8">
+            <h3 class="text-center payment-successful-title mb-4">Thank you for choosing Hendrx Health</h3>
+            <p class="text-center mb-1">A confirmation email has been sent to you.</p>
+            <p class="text-center mb-1">Please allow 24 hours for your Hendrx Health provider to review your chart.</p>
+            <p class="text-center mb-1">Your provider will contact you if additional information is needed.</p>
+            <div class="thanx-btn mt-5 flex-column">
+                <a asp-action="OrderHistory" asp-controller="Patient" asp-area="PatientPortal" class="btn thanx-page-btn border-0 mb-2">PROCEED TO YOUR ACCOUNT</a>
+                <a href="https://www.hendrxhealth.com" class="btn thanx-page-btn border-0 mt-2">BACK TO HENDRX HOME PAGE</a>
+            </div>
+        </div>
+        <div class="thanks-page-background col-md-4 thanx-text d-flex align-items-center flex-column mt-md-0 mt-5">
+            <h3 class="text-center hendrx-top-title font-weight-bold ">Your Hendrx Health Provider</h3>
+            <div class="payment-profile-img">
+                <img src="~/Images/tyler-img.png" alt="...">
+            </div>
+            <h3 class="text-center font-weight-bold mt-1 ">Tyler Hendricks, MD</h3>
+            <p>Physician</p>
+            <p class="text-center">Board certified in family medicine</p>
+            <h5 class="font-weight-bold">
+                Licensed in:
+            </h5>
+            <p class="text-center mb-0">AL, AR, AZ, CA, CO, CT, DC, DE, FL, GA, HI, IA, ID,</p>
+            <p class="text-center mb-0">IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS,</p>
+            <p class="text-center mb-0"> NC, ND, NE, NH, NJ, NV, OH, OK, OR, PA, RI, SC,</p>
+            <p class="text-center mb-0">SD, TN, TX, UT, VA, VT, WA, WI, WV, and WY</p>
+        </div>
+    </div>
+</div>
+
+

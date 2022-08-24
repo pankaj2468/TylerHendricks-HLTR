@@ -1,0 +1,132 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>TylerHendricks_Web</RootNamespace>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <UserSecretsId>3c145053-b8c9-4901-8986-73c3f7b55b10</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\PhysicianPortal\Views\Shared\Components\ProgressBar\**" />
+    <Compile Remove="EmailTemplate\**" />
+    <Content Remove="Areas\PhysicianPortal\Views\Shared\Components\ProgressBar\**" />
+    <Content Remove="EmailTemplate\**" />
+    <EmbeddedResource Remove="Areas\PhysicianPortal\Views\Shared\Components\ProgressBar\**" />
+    <EmbeddedResource Remove="EmailTemplate\**" />
+    <None Remove="Areas\PhysicianPortal\Views\Shared\Components\ProgressBar\**" />
+    <None Remove="EmailTemplate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\PatientPortal\Views\Patient\PrescriptionforKetoconazole.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AsyncFixer" Version="1.5.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
+    <PackageReference Include="FluentEmail.Razor" Version="3.0.0" />
+    <PackageReference Include="FluentEmail.SendGrid" Version="3.0.0" />
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
+    <PackageReference Include="MailKit" Version="2.13.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
+    <PackageReference Include="SecurityCodeScan.VS2019" Version="5.6.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SweetAlert" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TylerHendricks-Core\TylerHendricks-Core.csproj" />
+    <ProjectReference Include="..\TylerHendricks-Repo\TylerHendricks-Repo.csproj" />
+    <ProjectReference Include="..\TylerHendricks-Utility\TylerHendricks-Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\twitter-bootstrap-JS\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\LogException\Views\Error\Error.cshtml" />
+    <None Include="Areas\LogException\Views\Error\ResorceNotFound.cshtml" />
+    <None Include="Areas\LogException\Views\Shared\_ErrorLayout.cshtml" />
+    <None Include="Areas\LogException\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\LogException\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\ExitConsultation.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\ForGotPassword.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\Index.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\Login.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\NotifyPatient.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\ResetPassword.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\SelectState.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\Signup.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Home\StartConsultation.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\ChangePassword.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\CheckOut.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\CheckOutforMessage.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\ChooseYourMedication.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\ConsultationOptions.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\FinishAccountSetup.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\FinishAccountSetupHairLoss.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\Index.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\Messages.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\OrderHistory.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\PaymentFailure.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\PaymentSuccess.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\PaymentSuccessChat.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\PharmacyInformation.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\Profile.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Patient\UpdateEmail.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\Components\Header\Default.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\Components\ProgressBar\Default.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\Error.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\_Loader.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\_PatientLayout.cshtml" />
+    <None Include="Areas\PatientPortal\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\ForGotPassword.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\Login.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\PatientChart.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\PhysicianDashboard.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\Profile.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Home\ResetPassword.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\Components\HeaderPhysician\Default.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\Components\PhysicianRecord\Default.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\_Loader.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\_PatientChart.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\_PhysicianPortalLayout.cshtml" />
+    <None Include="Areas\PhysicianPortal\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\favicon.ico" />
+  </ItemGroup>
+
+</Project>

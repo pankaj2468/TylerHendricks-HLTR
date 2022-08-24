@@ -1,0 +1,28 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:8089/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+      }
+    },
+    "Start": {
+      "commandName": "IISExpress",
+      "ErrorString": "Unexpected character encountered while parsing number: `. Path 'iisSettings.iisExpress.sslPort', line 8, position 18."
+    },
+    "WSL 2": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}

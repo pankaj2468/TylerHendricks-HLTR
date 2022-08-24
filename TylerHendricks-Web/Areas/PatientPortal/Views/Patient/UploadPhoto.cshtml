@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "UPLOAD MEDCINE PHOTOS" });
+<style>
+    .btnphoto {
+        background: #063b46;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 2px;
+        font-size: 1.2rem !important;
+        text-transform: uppercase;
+        padding: 0 1rem;
+        line-height: 1.7;
+        border: 0;
+    }
+</style>
+<section class="col-12">
+    <div class="container">
+        <div class="row mainQs">
+            <div class="col-12 d-flex align-items-center flex-column">
+                <form method="post">
+                    <div class="d-flex justify-content-around flex-column ">
+                        <p class="text-center midContent" style=" margin-bottom: 44px;">
+                            Please upload a photo of your recent medication bottle, or listing from a pharmacy.<br />
+                            This bottle/document must be less than one year old, and less than 30 days out of date.<br /> You can upload up to three photos.
+                        </p>
+                        <div>
+                            <img id="ImgPreviewMedicine" src="~/Images/selfie.png" style=" height: 241px; width: 401px; padding-left: 121px; margin-left: 64px;" />
+                        </div>
+                        <div class="text-center w70 mt-4">
+                            <input type="file" id="fuploadMedicine" accept="image/*" onchange="filePreview(this,'ImgPreviewMedicine')" hidden/>
+                            <button type="button" class="btnphoto" style="width: 276px; margin-left: 30px;" onclick="document.getElementById('fuploadMedicine').click();">UPLOAD PHOTO</button>
+                        </div>
+                        <div class="text-center w70 mt-4">
+                            <button type="button" onclick="window.location.href='/PatientPortal/Patient/UploadSelfieAndPhotoId'"
+                                    class="btn-theme2 btn-block mb-4" style=" width: 220px; margin-left: 118px; margin-top: 25px;">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,39 @@
+﻿@inject IRepositoryCollection _repoCollection
+@model SessionManager
+@{
+    ViewData["Title"] = "State selection";
+    var listState = await _repoCollection.States.GetStates();
+}
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = false, HeadingText = "" })
+<section class="col-12 select-wrapper">
+    <div class="container-fluid">
+        <div class="row mainQs">
+            <div class="col-md-12 mt-2 mb-5 text-center text-md-left pl-0">
+                <a class="pre select-state-iconmargin ml-0" asp-controller="Home" asp-action="Index" asp-area="PatientPortal">
+                    <img src="~/Images/arrow-alt.png" alt="">Previous
+                </a>
+            </div>
+            <div class="col-12 mt-5 d-flex align-items-center flex-column">
+                <form method="post" class="selectstate-button">
+                    <div class="d-flex justify-content-around flex-column">
+                        <p class="text-center">In which state are you currently?</p>
+                        <div class="wrap">
+                            <select class="select-rel form-control br-0 input-bg" onchange="SelectStateDropdownChange(this)" asp-for="StateId" asp-items="@(new SelectList(listState,"Id","StateName"))">
+                                <option value="0"></option>
+                            </select>
+                        </div>
+                        <span id="SelectSelectionErrorMessage" asp-validation-for="StateId" class="pt-1 span-danger text-danger text-center"></span>
+                        <div class="text-center  mt-4">
+                            <button type="submit" class="btn-font s-center btn-theme2 btn-block">Next</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/JS/Common.js?v=1.0.0.0"></script>
+}

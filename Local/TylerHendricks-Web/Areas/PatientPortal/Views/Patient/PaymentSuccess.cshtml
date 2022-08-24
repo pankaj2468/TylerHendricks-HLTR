@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "PaymentSuccess";
+
+}
+<section class="col-12 header">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2 align-items-center">
+            <div class="col-md-12 text-center">
+                <div class="logoWrapper">
+                    <img src="~/Images/logo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-md-8">
+            <h3 class="text-center payment-successful-title">Thank you for choosing Hendrx Health</h3>
+            <p class="text-center mt-3 p-3 mb-0">
+                A confirmation email has been sent to you.
+            </p>
+            <p class="text-center p-3">
+                Please allow 24 hours for our medical team to review your chart.<br />
+                If additional information is needed we will email you.<br />
+            </p>
+            <div class="thanx-btn mt-4">
+                <a asp-action="OrderHistory" asp-controller="Patient" asp-area="PatientPortal" class="btn blue3-btn border-0 mr-2">PROCEED TO YOUR ACCOUNT</a>
+                <a href="https://www.hendrxhealth.com" class="btn blue3-btn border-0 ml-2">BACK TO HENDRX HOME PAGE</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        UpdateSession();
+    });
+    function UpdateSession() {
+        let date = new Date();
+        let timeZoneoff = date.getTimezoneOffset();
+        $.ajax({
+            type: 'POST',
+            url: '' + PatientPortalUrl.SetSesstionUrl + '',
+            data: { timeZone: timeZoneoff },
+            dataType: 'json',
+            async: true,
+            beforeSend: function () {  },
+            complete: function () { },
+            success: function (response) { },
+            error: function () { }
+        });
+    }
+</script>

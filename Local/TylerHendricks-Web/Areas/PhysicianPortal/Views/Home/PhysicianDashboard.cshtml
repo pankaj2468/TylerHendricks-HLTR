@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Physician Dashboard";
+}
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = true, HeadingText = "PHYSICIAN DASHBOARD"})
+    <div class="container-fluid topTab">
+        <div class="row res-1">
+            <div class="col-md-6 pl-0" style="margin-top:5px;">
+                <div class="row">
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 1, RecordText = "Ready to prescribe", Class="k3" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 2, RecordText = "Further review needed", Class = "k1" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 3, RecordText = "Pending response", Class = "k1" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 4, RecordText = "All patients", Class = "k1" })
+                </div>
+            </div>
+            <div class="col-md-6 pr-0" style="margin-top:5px;">
+                <div class="row">
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 5, RecordText = "Denied", Class = "k1" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 6, RecordText = "Potential duplicates", Class = "k1" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 7, RecordText = "Responded", Class = "k1" })
+                    @await Component.InvokeAsync("PhysicianRecord", new { RecordType = 8, RecordText = "Not currently servicing your area", Class = "k1" })
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12 mt-4 p-0">
+                <div class="input-group ">
+                    <div class="input-group-prepend searchBg">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="text" id="txtSearch" class="form-control br-0" placeholder="Type of search">
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="container-fluid topTab">
+        <div class="table-responsive" style="margin-left:-16px;width:103%;overflow:hidden">
+            <table class="table table-style" id="tblPatientDashboard" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Patient Name</th>
+                        <th>Service Type</th>
+                        <th>DOB</th>
+                        <th>State</th>
+                        <th>Submitted</th>
+                        <th>Requested Rx</th>
+                        <th>Refills Requested</th>
+                        <th>Status</th>
+                        <th>Wait in Queue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <table class="table table-style" id="tblPatientNotifyDashboard" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>SNo</th>
+                        <th>Email</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    <script src="~/JS/PhysicianDashboard.js?v=1.0.0.2"></script>
+}
+

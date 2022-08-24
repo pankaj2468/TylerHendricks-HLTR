@@ -1,0 +1,187 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject IUserService _userService
+@model AccountSetupED
+@{
+    ViewData["Title"] = "AccountSetup";
+    var listState = await _repoCollection.States.GetStates();
+    var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+    var deliveryCheck = Convert.ToBoolean(TempData.Peek("IsHomeDelivery"));
+    var medicineName = TempData.Peek("MedicationName").ToString();
+    var listConsultation = (await _repoCollection.Patients.GetDetailViews(sessionManager.ConsultationCategoryId, deliveryCheck)).OrderBy(x => x.Refill).ToList();
+}
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+    <section>
+        <div class="container-fluid AccountSetup setupaccount">
+            <form method="post" id="FinishAccountSetupForm">
+                <div class="row chooseMedication">
+                    <div class="col-md-6 d-flex flex-column align-items-center backgroundtheme bg-white">
+                        @if (deliveryCheck)
+                        {
+                            <a class="pre text-center text-md-left pl-5 new-previous-btn w-100 mt-4 mb-0" asp-controller="Patient" asp-action="SelectDeliveryOption" asp-area="PatientPortal">
+                                <img src="/Images/arrow-alt.png" alt=""> Previous
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="pre text-center text-md-left pl-5 new-previous-btn w-100 mt-4 mb-0" asp-controller="Patient" asp-action="PharmacyInformation" asp-area="PatientPortal">
+                                <img src="/Images/arrow-alt.png" alt=""> Previous
+                            </a>
+                        }
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (deliveryCheck)
+                                {
+                                    <h3 class="themecolor1 mt-3">Shipping address & account setup</h3>
+                                    <p class="ac-setup mb-3">Your medication will be shipped to the address you provide below. Please ensure the correct information is provided. Errors may result in delayed or lost shipments.</p>
+                                }
+                                else
+                                {
+                                    <h3 class="themecolor1 mt-3">Finish Account Setup</h3>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="inputFeilds">
+                                    <div class="form-group">
+                                        <label class="mb-0">First Name</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="FirstName" type="text" />
+                                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <span class="text-danger" asp-validation-for="AddressLine2"></span>
+                                        <label class="mb-0">Last Name</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="LastName" type="text" />
+                                            <span class="text-danger" asp-validation-for="LastName"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label class="mb-0">Date of Birth</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0 text-uppercase" min="1900-01-01" max="@(DateTime.UtcNow.ToString("yyyy-MM-dd"))" asp-for="DateOfBirth" placeholder="mm/dd/yyyy" />
+                                            <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label class="mb-0">Phone Number</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0 IsPhoneNumber" asp-for="PhoneNumber" type="tel" />
+                                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label class="mb-0">Address Line 1</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" asp-for="AddressLine1" type="text" />
+                                            <span class="text-danger" asp-validation-for="AddressLine1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label class="mb-0">Address Line 2 (optional)</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" asp-for="AddressLine2" type="text" />
+                                            <span class="text-danger" asp-validation-for="AddressLine2"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label class="mb-0">City</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="City" type="text" />
+                                            <span class="text-danger" asp-validation-for="City"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items mView">
+                                        <div class="form-group my-wrap pl-0 pr-1 mb-2">
+                                            <label class="mb-0">State</label>
+                                            <div class="inputControl position-relative wrap">
+                                                <select class="select-state form-control br-0" onchange="FinishAccountDropdownChange(this)" asp-for="State" asp-items="@(new SelectList(listState,"Id","StateName"))">
+                                                    <option value="0"></option>
+                                                </select>
+                                                <span class="text-danger" asp-validation-for="State"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group my-wrap pr-0 pl-1 mb-2">
+                                            <label class="mb-0">Zip Code</label>
+                                            <div class="inputControl position-relative">
+                                                <input class="form-control br-0" oninput="Numeric(this)" asp-for="ZipCode" type="tel" />
+                                                <span class="text-danger" asp-validation-for="ZipCode"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column align-items-center selectSection finalaccountsetup">
+                        <h3 class="themecolor1 mt-md-2">Select one of the options below:</h3>
+                        <input type="text" id="hdnFinishDetailId" asp-for="DetailId" class="input-hidden"/>
+                        <div class="selectWrap d-flex justify-content-between align-content-center mt-2">
+                            @foreach (var item in listConsultation)
+                            {
+                                <div class="box">
+                                    <p class="price bg-golden"><b>$@Convert.ToInt32(item.MedicationRate)</b></p>
+                                    <div class="tabDose d-flex flex-column justify-content-between">
+                                        <div>
+                                            <p class="font-weight-bold mb-1">Physician Consult</p>
+                                            <p class="font-weight-bold text-center mb-1 text-golden font-size16">+</p>
+                                            <p class="font-weight-bold mb-1">Prescription</p>
+                                            @if (item.IsHomeDelivery)
+                                            {
+                                                <p>(@((item.Refill+1)*item.RefillDay) tablets)</p>
+                                            }
+                                            else
+                                            {
+                                                <p>(30 day supply)</p>
+                                                switch (item.Refill)
+                                                {
+                                                    case 0:
+                                                        break;
+                                                    case 1:
+                                                        <p class="font-weight-bold text-center mb-1 text-golden font-size16">+</p>
+                                                        <p class="font-weight-bold mb-1">1 refill</p>
+                                                        <p>(30 day supply)</p>
+                                                        break;
+                                                    default:
+                                                        <p class="font-weight-bold text-center mb-1 text-golden font-size16">+</p>
+                                                        <p class="font-weight-bold mb-1">@item.Refill refills</p>
+                                                        <p>(30 day supply each)</p>
+                                                        break;
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <input type="radio" class="hidden chooseMedication" data-value="@item.Id" data-delivery="@item.IsHomeDelivery" data-price="@Convert.ToInt32(item.MedicationRate)" data-refill="@item.Refill" name="cb1" id="cb@(item.Id)">
+                                    <label for="cb@(item.Id)" class="btn btn-block ckbox-button">select</label>
+                                </div>
+                            }
+                        </div>
+                        <div class="Msgbox msg-sum">
+                            <h5 class="mt-4 theme-color-13"><b>Summary</b></h5>
+                            <div class="tabDose mb-2" id="MediSummary">
+                                <p>
+                                    <span>@medicineName</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="total-prc">
+                            <h5 style="min-height: 36px;" class="theme-color-13"><b class="hide-select">Total $<span id="TotalPrice">0</span></b></h5>
+                        </div>
+                        <div class="btnWrapper mt-3">
+                            <div class="text-center m-1">
+                                <span asp-validation-for="DetailId" class="text-danger"></span>
+                                @*<span class="text-danger" id="ErrorFinishAccountSetup" style="display:none;">Please select a consultation option</span>*@
+                            </div>
+                            <button class="btn btn-next mb-4" type="submit">PROCEED TO CHECKOUT</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+@section Scripts
+{
+    <script src="~/JS/Common.js?v=1.0.0.0"></script>
+}

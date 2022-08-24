@@ -1,0 +1,21 @@
+﻿@inject IHttpContextAccessor _httpContext;
+@{
+
+    var AreaName = _httpContext.HttpContext.Request.RouteValues["Area"].ToString();
+    if (AreaName == Areas.PortalType.PatientPortal.ToString())
+    {
+        Layout = "_PatientLayout";
+    }
+    else if (AreaName == Areas.PortalType.PhysicianPortal.ToString())
+    {
+        Layout = "_PhysicianPortalLayout";
+    }
+    else if (AreaName == Areas.PortalType.AdminPortal.ToString())
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_ErrorLayout";
+    }
+}

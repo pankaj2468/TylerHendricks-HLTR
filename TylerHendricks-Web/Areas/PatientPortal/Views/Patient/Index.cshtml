@@ -1,0 +1,98 @@
+﻿@inject IRepositoryCollection _repoColl
+@inject IUserService _userService
+@model Questions
+@{
+    ViewData["Title"] = "Questionnaire";
+    var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+    var ShowBackButton = await _repoColl.Patients.QuestionCountIsOne(_userService.GetUserId(), sessionManager.ConsultationCategoryId);
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = true, StaticHeading = true, HeadingText = "Finish Acccount Setup", QuestionId = Model.PreviousQuestionId })
+
+<section class="col-12 questionaire-page">
+    <form method="post" class="mt-4" id="formQuestionaire">
+        <input type="hidden" value="@TempData["alert"]" id="hiddenAlert" />
+        <div class="container-fluid custom-padding">
+            <div class="row mainQs d-flex justify-content-between fluid-width">
+                @await Component.InvokeAsync("ProgressBar", new { IsStaticBar = false, QuestionId = Model.PreviousQuestionId })
+                <div class="col-md-12 mt-4 mb-4 text-center text-md-left pl-0">
+                    @if (ShowBackButton==true || Model.PreviousQuestionId == 19 || Model.PreviousQuestionId == 43 || Model.PreviousQuestionId == 60)
+                    {
+                        <a class="pre ml-0" asp-controller="Patient" asp-action="PreviousQuestion" asp-area="PatientPortal">
+                            <img src="/Images/arrow-alt.png" /> Previous
+                        </a>
+                    }
+                </div>
+                <div class="col-12 d-flex align-items-center flex-column mt-5 upload-wrapper">
+                    <div class="d-flex justify-content-around flex-column mt-5 m-auto">
+                        <p class="text-center midContent mb-0">
+                            @Html.Raw(Model.Description)
+                        </p>
+                        <div class="text-center w90 width-full row">
+                            <input type="hidden" asp-for="Id" value="@Model.Id" />
+                            <input type="hidden" asp-for="Response" id="hdnResponse" value="@Model.Response" />
+                            <input type="hidden" asp-for="NextQuestionId" id="hdNextQuestion" value="@Model.NextQuestionId" />
+                            <input type="hidden" asp-for="PreviousQuestionId" id="hdPrevQuestion" value="@Model.PreviousQuestionId" />
+                            <input type="hidden" asp-for="PopText" id="hdModalPopup" value="@Model.PopText" />
+                            <input type="hidden" asp-for="PopText1" id="hdModalPopup1" value="@Model.PopText1"/>
+                            <input type="hidden" asp-for="Answer" id="hdAnswer" value="@Model.Answer"/>
+                            <input type="hidden" asp-for="ConsultationCategoryId" value="@Model.ConsultationCategoryId"/>
+                            <input type="hidden" asp-for="IsNote" value="@Model.IsNote" />
+                            
+                            <div class="btnWrap d-flex justify-content-center w-100 btn-wrp ">
+                                @if (Model.PreviousQuestionId != 19 && Model.PreviousQuestionId != 43 && Model.PreviousQuestionId != 60)
+                                {
+                                    if (Model.IsNote == true)
+                                    {
+                                        if (Model.PreviousQuestionId == 57 || Model.PreviousQuestionId == 21)
+                                        {
+                                            <button type="submit" class="btn-theme2 fs-22 btn-mr new-next-btn mb-3 d-md-block d-none" onclick="SetResponse(this, true,@Model.NextQuestionId);">NEXT</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn-theme2 fs-22  btn-mr new-next-btn mb-3 new-next-btn-2" onclick="SetResponse(this, true,@Model.NextQuestionId);">NEXT</button>
+                                        }
+                                    }
+                                    else if (Model.PreviousQuestionId == 25)
+                                    {
+                                        <button type="submit" class="btn-theme2 fs-22 btn-mr mr-2 yesbuton lg-btn" onclick="SetResponse(this, true,@Model.NextQuestionId);">Yes - I am currently taking the medication</button>
+                                        <button type="submit" class="btn-theme2 fs-22 mr-2 yesbuton" onclick="NotResponse(this, true,@Model.NextQuestionId1);">No - I have run out of the medication</button>
+                                    }
+                                    else if (Model.PreviousQuestionId == 29)
+                                    {
+
+                                        <button type="submit" class="btn-theme2 fs-22 btn-mr mr-2" onclick="SetResponse(this, true,@Model.NextQuestionId);">YES</button>
+                                        <button type="submit" class="btn-theme2 fs-22 ml-2" onclick="SetResponse(this, false,@Model.NextQuestionId1);">NO/NOT APPLICABLE</button>
+                                        
+                                    }
+                                    else
+                                    {
+                                        if (Model.ModalPopupId != 0 && Model.ModalPopupId != null)
+                                        {
+                                            <button type="button" class="btn-theme2 fs-22 btn-mr mr-2 patient-btn" onclick="SetResponse(this, true,@Model.NextQuestionId);">YES</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn-theme2 fs-22 btn-mr mr-2 patient-btn" onclick="SetResponse(this, true,@Model.NextQuestionId);">YES</button>
+                                        }
+                                        if (Model.ModalPopupId1 != 0 && Model.ModalPopupId1 != null)
+                                        {
+                                            <button type="button" class="btn-theme2 fs-22 ml-2 patient-btn" id="btn-pd" onclick="NotResponse(this, false,@Model.NextQuestionId1);">NO</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn-theme2 fs-22 ml-2 patient-btn" id="btn-pd" @*onclick="NotResponse(this, false,@Model.NextQuestionId1);"*@>NO</button>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+@section Scripts {
+    <script src="~/JS/Login.js"></script>
+}

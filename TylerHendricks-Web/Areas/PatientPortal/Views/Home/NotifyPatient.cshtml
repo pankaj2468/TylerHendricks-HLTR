@@ -1,0 +1,44 @@
+﻿@model Notify
+@{
+    ViewData["Title"] = "Notify Page";
+}
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = false, HeadingText = "" })
+
+<section class="col-12 select-wrapper">
+    <div class="container-fluid">
+        <div class="row mainQs">
+            <div class="col-md-12 mt-2 text-center text-md-left pl-0 mob-t5 mob-b5">
+                <a class="pre select-state-iconmargin ml-0" asp-controller="Home" asp-action="SelectState" asp-area="PatientPortal">
+                    <img src="/Images/arrow-alt.png" /> Previous
+                </a>
+            </div>
+            <div class="col-12  d-flex align-items-center flex-column">
+                <form method="post">
+                    <div class="d-flex justify-content-around flex-column">
+                        @if (!Convert.ToBoolean(ViewBag.isRecordSvae))
+                        {
+                            <p class="text-center midContent fs-12">
+                                <span>Hendrx Health is currently not servicing your state.</span><br />
+                                <span>If you would like to be notified once we are available</span><br />
+                                <span>in your state please provide your email below.</span>
+                            </p>
+                            <input type="text" asp-for="Email" class="form-control br-0" placeholder="enter email address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <input type="hidden" asp-for="StateId" value="@ViewBag.StateId" />
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn-theme2 notify-btn btn-block">Yes, please notify me</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-center midContent p-notify">
+                                <span>Thank you for your submission.</span><br />
+                                <span>We look forward to servicing you in the future.</span>
+                            </p>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

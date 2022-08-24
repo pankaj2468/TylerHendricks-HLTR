@@ -1,0 +1,93 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject EnvironmentalResource _environmentalResource
+@model MessagesViewModel
+@{
+    Layout = null;
+}
+<div class="text-box mt-3 p-4">
+    @if (Model.userChats != null)
+    {
+        foreach (var item in Model.userChats.OrderByDescending(x => x.SendingDate))
+        {
+            if (!string.IsNullOrEmpty(item.Reply))
+            {
+                <div class="docMsg">
+                    @if (item.ReceiverName.ToLower().Contains("hendricks"))
+                    {
+                        <h6 class="theme-color-13">@item.ReceiverName</h6>
+                        <h6 class="theme-color-13">@Convert.ToDateTime(item.ReplyDate).ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                    }
+                    else
+                    {
+                        <h6 class="theme-color-4">@item.ReceiverName</h6>
+                        <h6 class="theme-color-4">@Convert.ToDateTime(item.ReplyDate).ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                    }
+                    <p>@Html.Raw(TextToHtml(item.Reply))</p>
+                    @if (!string.IsNullOrEmpty(item.Attachment))
+                    {
+                        <img src="@(await _repoCollection.AmazonCustom.GetImage(item.Attachment,_environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true))" width="100" class="message-img" />
+                    }
+                </div>
+            }
+            <div class="docMsg">
+                @if (item.SenderName.ToLower().Contains("hendricks"))
+                {
+                    <h6 class="theme-color-13">@item.SenderName</h6>
+                    <h6 class="theme-color-13">@item.SendingDate.ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                }
+                else
+                {
+                    <h6 class="theme-color-4">@item.SenderName</h6>
+                    <h6 class="theme-color-4">@item.SendingDate.ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                }
+                <p>@Html.Raw(TextToHtml(item.Message))</p>
+            </div>
+        }
+    }
+</div>
+<textarea id="txtChatArea" placeholder="Type your message" class="w-100 mt-4 grey-border p-2"></textarea>
+<input type="hidden" id="hdnChatOption" value="@Model.ChatPayment.ToString()" />
+<div class="row">
+    <div class="col-md-6 mt-3">
+        @if (Model.StartChat)
+        {
+            <a class="theme-large-btn btn-custom-link" style="cursor:pointer;" id="BtnSaveChat">Submit</a>
+        }
+        else
+        {
+            <a class="grey-large-btn btn-custom-link">Submit</a>
+        }
+    </div>
+    <div class="col-md-6 mt-3">
+        <div class="bg-white start-cover-sec">
+            @if (Model.ChatPayment == false)
+            {
+                <p class="m-0 px-4">For $9 you can initiate a one on one coversation with your provider.</p>
+                <a asp-action="CheckOutforMessage" asp-controller="Patient" asp-area="PatientPortal" class="teal-btn w-75 mt-2">Start your conversation</a>
+            }
+            else
+            {
+                <p class="m-0 px-4">Start your conversation.</p>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.IsRequestedSelfie == true)
+        {
+            <a class="btn btn-msg" id="hlkSelfie" title="Upload Selfie" onclick="$('#fuSelfie').click();">Attach selfie</a>
+            <input type="file" title="@PhotoType.Selfie" id="fuSelfie" onchange="fileValidateMessagePage(this)" accept="image/*" hidden />
+        }
+        @if (Model.IsRequestedPhotoId == true)
+        {
+            <a class="btn btn-msg" id="hlkPhotoId" title="Upload PhotoId" onclick="$('#fuPhotoId').click();">Attach photo Id</a>
+            <input type="file" title="@PhotoType.PhotoId" id="fuPhotoId" onchange="fileValidateMessagePage(this)" accept="image/*" hidden />
+        }
+        @if (Model.IsRequestedMedication == true)
+        {
+            <a class="btn btn-msg" id="hlkMedicine" title="Upload Medicine" onclick="$('#fuMedicine').click();">Attach Photo</a>
+            <input type="file" title="@PhotoType.Medicine" id="fuMedicine" onchange="fileValidateMessagePage(this,3)" multiple="multiple" accept="image/*" hidden />
+        }
+    </div>
+</div>

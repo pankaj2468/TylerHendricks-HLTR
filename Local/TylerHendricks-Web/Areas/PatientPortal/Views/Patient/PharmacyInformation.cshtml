@@ -1,0 +1,110 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject IUserService _userService
+@model PharmacyInformationModel
+@{
+    ViewData["Title"] = "PharmacyInfo";
+    var listState = await _repoCollection.States.GetStates();
+    var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+}
+<div id="UpdateContentDiv" style="width:100%">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid">
+            <form method="post" id="PharmacyForm">
+                <div class="row pharmacyInfo">
+                    <div class="col-md-12 d-flex flex-column mt-2">
+                        <div class="row">
+                            <div class="col-md-12 mt-4 text-center text-md-left pl-0">
+                                @if (sessionManager.ConsultationCategoryId == (int)ConsultationType.ErectileDysfunction || sessionManager.ConsultationCategoryId == (int)ConsultationType.HairLoss)
+                                {
+                                    <a class="pre ml-0" asp-controller="Patient" asp-action="SelectDeliveryOption" asp-area="PatientPortal">
+                                        <img src="~/Images/arrow-alt.png" alt="">Previous
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="pre ml-0" asp-controller="Patient" asp-action="PreviousMove" asp-area="PatientPortal">
+                                        <img src="~/Images/arrow-alt.png" alt="">Previous
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 p-0 upload-wrapper-pharmacy d-flex flex-column inputFeilds align-items-center">
+                        <h3>ENTER YOUR PHARMACY INFO BELOW</h3>
+                        <p class="fs-14 mb-4 text-center pharmacyInfo-link">
+                            <a href="https://www.hendrxhealth.com/how-to-save-on-your-prescription" target="_blank">Click here to learn how to save on your prescription</a>
+                        </p>
+                        <div class="selectWrap d-flex justify-content-between align-content-center">
+                            <div>
+                                <div class="form-group mb-2">
+                                    <label class="mb-0">Pharmacy Name</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" asp-for="PharmacyName" type="text" />
+                                        <span class="text-danger" asp-validation-for="PharmacyName"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="mb-0">Phone Number</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0 IsPhoneNumber" asp-for="PhoneNumber" type="tel"/>
+                                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="mb-0">Address Line 1</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" asp-for="AddressLine1" type="text" />
+                                        <span class="text-danger" asp-validation-for="AddressLine1"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="mb-0">Address Line 2 (Optional)</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" asp-for="AddressLine2" type="text" />
+                                        <span class="text-danger" asp-validation-for="AddressLine2"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="mb-0">City</label>
+                                    <div class="inputControl position-relative">
+                                        <input class="form-control br-0" onkeypress="onlyLetter(event)" asp-for="City" type="text" />
+                                        <span class="text-danger" asp-validation-for="City"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items mView">
+                                    <div class="form-group my-wrap pl-0 pr-1 mb-2">
+                                        <label class="mb-0">State</label>
+                                        <div class="inputControl position-relative wrap">
+                                            <select class="select-state form-control br-0" onchange="PharmacyDropdownChange(this)" asp-for="State" asp-items="@(new SelectList(listState,"Id","StateName"))">
+                                                <option value="0"></option>
+                                            </select>
+                                            <span class="text-danger" asp-validation-for="State"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group my-wrap pr-0 pl-1 mb-2">
+                                        <label class="mb-0">Zip code</label>
+                                        <div class="inputControl position-relative">
+                                            <input class="form-control br-0" oninput="Numeric(this)" asp-for="ZipCode" type="tel" />
+                                            <span class="text-danger" asp-validation-for="ZipCode"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group term-check">
+                                    <input type="checkbox" id="termsPharmacy" onchange="termshandlerPharmacy(event)">
+                                    <label for="termsPharmacy" class="term">I agree to the <a href="https://www.hendrxhealth.com/pharmacy-terms" target="_blank" class="label-term">terms of using your chosen pharmacy.</a></label>
+                                </div>
+                                <button type="submit" id="btnSubmitPharmacy" class="btn btn-theme btn-block mb-3" disabled="true">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script src="~/JS/Common.js?v=1.0.0.0"></script>
+}

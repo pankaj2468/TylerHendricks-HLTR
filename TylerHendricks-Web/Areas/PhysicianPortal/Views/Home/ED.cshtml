@@ -1,0 +1,600 @@
+﻿@inject IRepositoryCollection _repoCollection
+@model QuestionManual
+@{
+    ViewData["Title"] = "ED Manual Questionnaire";
+    var listState = (await _repoCollection.States.GetStates()).Where(x => x.Status == true).ToList();
+    var listStateAll = await _repoCollection.States.GetStates();
+}
+@await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = true, HeadingText = "" })
+
+
+<section class="mx-auto ques-width my-5">
+    <form id="_AjaxFormED" method="post" asp-area="PhysicianPortal" asp-action="ED" asp-controller="Home">
+        @Html.AntiForgeryToken()
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <h4 class="text-center modal-consultation-type-heading">MANUAL PATIENT INTAKE</h4>
+            <div class="select mt-3 questionairee-select-width">
+                <div class="select"><div class="custom-select" style="pointer-events:none;">ERECTILE DYSFUNCTION</div></div>
+            </div>
+        </div>
+        <div class="row border d-flex align-items-center mt-3">
+            <div class="col-lg-8">
+                <p class="mb-0">In which state you are currently?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="select w-100">
+                    <select id="dropdownState" asp-for="State" class="hide-select" asp-items="@(new SelectList(listState,"Id","StateName"))"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Are you a male aged 18-75 seeking treatment for improved sexual activity?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question1" json-key="1" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question1" json-key="1" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">
+                    Have you taken medication to improve sexual performance in the past?
+                    Examples include Viagra (Sildenafil), Cialis (Tadalafil), or Levitra
+                </p>
+                <i>If you are new to these medications we will start you at a lower dose.</i>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question2" json-key="3" json-value="Yes" /><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question2" json-key="3" json-value="No" /><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">
+                    Do you have any allergies to Viagra (Sildenafil), Cialis (Tadalafil) or Levitra
+                    or have you experienced any side effects from these medications?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question3" json-key="5" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question3" json-key="5" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">
+                    Have you had a physical exam in the last year?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question4" json-key="7" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question4" json-key="7" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">
+                    Has your physician advised you to avoid physical or sexual activity?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question5" json-key="9" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question5" json-key="9" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <table class="w-100 mb-2">
+                    <tbody>
+                        <tr class="table-heading">
+                            <th class="break">Blood Pressure Category</th>
+                            <th class="">
+                                Systolic
+                                <br>mm Hg
+                                <br>(upper #)
+                            </th>
+                            <th>
+                                Diastolic
+                                <br>mm Hg
+                                <br>(lower #)
+                            </th>
+                        </tr>
+                        <tr class="tr1">
+                            <td class="bp-table-data">Normal</td>
+                            <td class="bp-table-data">Less than 120</td>
+                            <td class="bp-table-data">Less than 80</td>
+                        </tr>
+                        <tr class="tr2">
+                            <td class="bp-table-data">Elevated</td>
+                            <td class="bp-table-data">120-129</td>
+                            <td class="bp-table-data">Less than 80</td>
+                        </tr>
+                        <tr class="tr3">
+                            <td class="bp-table-data">High Blood Pressure (Hypertension Stage 1)</td>
+                            <td class="bp-table-data">130-139</td>
+                            <td class="bp-table-data">80-89</td>
+                        </tr>
+                        <tr class="tr4">
+                            <td class="bp-table-data">High Blood Pressure (Hypertension Stage 2)</td>
+                            <td class="bp-table-data">140-160</td>
+                            <td class="bp-table-data">90 or Higher</td>
+                        </tr>
+                        <tr class="tr5">
+                            <td class="bp-table-data">Hypertensive Urgency (Consult your doctor immediately)</td>
+                            <td class="bp-table-data">Higher than 160</td>
+                            <td class="bp-table-data">Higher than 100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question6" json-key="11" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question6" json-key="11" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">Have you ever been diagnosed with low blood pressure?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question7" json-key="15" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question7" json-key="15" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">Do you have chest pain or shortness of breath when walking up two flights of stairs?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question8" json-key="17" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question8" json-key="17" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">Have you had a heart attack, stroke or TIA (transient ischemic attack)?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question9" json-key="19" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question9" json-key="19" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Have you experienced abnormal heart beats/arrythmias,
+                    cardiomyopathy, heart failure, or unstable angina (chest pain)?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question10" json-key="21" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question10" json-key="21" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Have you experienced any blurry/abnormal vision or severe unexplained headaches?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question11" json-key="23" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question11" json-key="23" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Are you currently taking any nitrate medications, or any of the following:
+                    Nitroglycerin, Isosorbide Dinitrate, Isosorbide Mononitrate, Riociguat, Ritonavir, Amyl Nitrate, "Poppers"
+                </p>
+                <p class="font-14 font-italic">
+                    Combining the medications listed above with erectile dysfunction medication can increase the risk of
+                    <br>cardiovascular complications, which can be fatal
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question12" json-key="25" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question12" json-key="25" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Have you been diagnosed with Peyronie's disease or any other deformation of the penis?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question13" json-key="27" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question13" json-key="27" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Are you currently taking any medications?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question14" json-key="29" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question14" json-key="29" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Please list your current medication and the corresponding medical condition</p>
+                <input type="hidden" name="Question15" json-key="65" json-value="" />
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div>
+                    <div class="d-flex align-items-start justify-content-around flex-wrap flex-lg-nowrap feilds mb-2 medicationdiv flex-column">
+                        <div class="formWrap w-100 m-0">
+                            <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Enter drug name"> <span class="text-danger form-display">Required</span>
+                        </div>
+                        <div class="formWrap w-100 m-0 ">
+                            <input class="form-control md-dose br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Enter dosage"> <span class="text-danger form-display">Required</span>
+                        </div>
+                        <div class="formWrap w-100 m-0">
+                            <div class=" mb-2">
+                                <div class="select"><select class="form-control md-unit list-medication hide-select"><option value="0">Unit</option><option value="1">%</option><option value="2">grams</option><option value="3">IU</option><option value="4">mcg</option><option value="5">mg</option><option value="6">mg/ml</option><option value="7">ml</option><option value="8">units</option></select><div class="custom-select">Unit</div><ul class="select-options form-display"><li rel="0">Unit</li><li rel="1">%</li><li rel="2">grams</li><li rel="3">IU</li><li rel="4">mcg</li><li rel="5">mg</li><li rel="6">mg/ml</li><li rel="7">ml</li><li rel="8">units</li></ul></div> <span class="text-danger form-display">Required</span>
+                            </div>
+                        </div>
+                        <div class="formWrap w-100 m-0">
+                            <div class=" mb-2">
+                                <div class="select"><select class="form-control md-form list-medication hide-select"><option value="0">Form</option><option value="1">capsule</option><option value="2">cream</option><option value="3">drops</option><option value="4">liquid</option><option value="5">ointment</option><option value="6">puffs</option><option value="7">spray</option><option value="8">units</option><option value="9">powder</option><option value="10">tablet</option></select><div class="custom-select">Form</div><ul class="select-options form-display"><li rel="0">Form</li><li rel="1">capsule</li><li rel="2">cream</li><li rel="3">drops</li><li rel="4">liquid</li><li rel="5">ointment</li><li rel="6">puffs</li><li rel="7">spray</li><li rel="8">units</li><li rel="9">powder</li><li rel="10">tablet</li></ul></div> <span class="text-danger form-display">Required</span>
+                            </div>
+                        </div>
+                        <div class="formWrap w-100 m-0">
+                            <div class=" mb-2">
+                                <div class="select"><select class="form-control md-frequency list-medication hide-select"><option value="0">Frequency</option><option value="1">once daily</option><option value="2">twice daily</option><option value="3">three times daily</option><option value="4">four times daily</option><option value="5">six times daily</option><option value="6">weekly</option><option value="7">as needed</option><option value="8">nightly</option></select><div class="custom-select">Frequency</div><ul class="select-options form-display"><li rel="0">Frequency</li><li rel="1">once daily</li><li rel="2">twice daily</li><li rel="3">three times daily</li><li rel="4">four times daily</li><li rel="5">six times daily</li><li rel="6">weekly</li><li rel="7">as needed</li><li rel="8">nightly</li></ul></div> <span class="text-danger form-display">Required</span>
+                            </div>
+                        </div>
+                        <div class="formWrap w-100 m-0">
+                            <input class="form-control md-medical-condition br-0" maxlength="500" type="text" oninput="checkEmpty(this)" placeholder="Enter medical condition"> <span class="text-danger form-display">Required</span>
+                        </div>
+                        <div class="d-block  d-flex justify-content-between add-btn-width align-items-center mt-2 w-100">
+                            <span class="text-danger form-display">Please fill out all required fields</span>
+                            <button type="button" id="btnstatic" class="btn-theme2 fs-22  btn-mr new-next-btn mb-3 mt-0 next-btn-full " onclick="MedicationDoseRow(this)">ADD</button>
+                            <button type="submit" class="btn-theme2 fs-22  btn-mr new-next-btn mb-3 mt-0 next-btn-full" onclick="SetResponse(this, true,58);">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-0">
+                    Are you taking any supplements?
+                </p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question16" json-key="30" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question16" json-key="30" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-md-8 blood-pressure-title">
+                <p class="mb-3">By proceeding with this consultation you agree to the following:</p>
+                <p align="justify">1. You have answered all of the questions in this consultation request accurately and truthfully.</p>
+                <p>2. You will stop your prescribed erectile dysfunction medication and seek immediate medical attention if you experience any concerning side effects of treatment.</p>
+                <p>3. The treatment is solely for your own use.</p>
+                <p>4. You will consult with your doctor before starting a new medication.</p>
+                <p>5. You understand our providers take your answers in good faith and base their prescribing decisions accordingly, and that incorrect information can be hazardous to your health.</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background questionairee-form-height  pb-1 pt-2">
+                <div class="control-group d-flex">
+                    <label class="control control--checkbox">Yes<input type="radio" name="Question17" json-key="32" json-value="Yes"><div class="control__indicator"></div></label>
+                    <label class="control control--checkbox ml-2">No<input type="radio" name="Question17" json-key="32" json-value="No"><div class="control__indicator"></div></label>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">UPLOAD SELFIE & PHOTO ID.</p>
+                <input type="hidden" name="Question18" json-key="89" json-value="" />
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <div class="square" onclick="openFileDialog('#fuploadMed1')">
+                            <i class="fa fa-plus" id="medSelection1" aria-hidden="true"></i>
+                            <img class="tri-image hide-select" src="" id="RxPreview1">
+                        </div>
+                        <p class="mb-0">Selfie Photo</p>
+                        <input type="file" id="fuploadMed1" onchange="fileValidateMed(this,'RxPreview1','medSelection1')" accept="image/*" hidden="">
+                    </div>
+                    <div class="col-4 col-md-offset-2">
+                        <div class="square" onclick="openFileDialog('#fuploadMed2')">
+                            <i class="fa fa-plus" id="medSelection2" aria-hidden="true"></i>
+                            <img class="tri-image hide-select" src="" id="RxPreview2">
+                        </div>
+                        <p class="mb-0"> Photo ID</p>
+                        <input type="file" id="fuploadMed2" onchange="fileValidateMed(this,'RxPreview2','medSelection2')" accept="image/*" hidden="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Choose your medication</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background d-flex justify-content-between pb-1 pt-2">
+                <div>
+                    <b>Sildenafil (Viagra)</b>
+                    <p class="text-center">(Taken as needed and is effective within 30 minutes)</p>
+                    <div class="control-group">
+                        <label class="control control--checkbox">
+                            20 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            25 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            50 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            100 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <b>Tadalafil (Cialis)</b>
+                    <p class="text-center">(Taken daily and is effective all day)</p>
+                    <div class="control-group">
+                        <label class="control control--checkbox">
+                            2.5 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            5 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            10 mg
+                            <input type="radio" name="medicinename" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            20 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Select Delivery Option</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background d-flex justify-content-between pb-1 pt-2">
+                <div>
+                    <b>Sildenafil (Viagra)</b>
+                    <p class="text-center">(Taken as needed and is effective within 30 minutes)</p>
+                    <div class="control-group">
+                        <label class="control control--checkbox">
+                            20 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            25 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            50 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            100 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <b>Tadalafil (Cialis)</b>
+                    <p class="text-center">(Taken daily and is effective all day)</p>
+                    <div class="control-group">
+                        <label class="control control--checkbox">
+                            2.5 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            5 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            10 mg
+                            <input type="radio" name="medicinename" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox ">
+                            20 mg
+                            <input type="radio" name="medicinename">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Pharmacy Information:</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.PharmacyName" class="form-control br-0 mb-2" placeholder="Pharmacy name">
+                    <span asp-validation-for="pharmacy.PharmacyName" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.PhoneNumber" class="form-control br-0 mb-2 IsPhoneNumber" placeholder="Pharmacy phone number">
+                    <span asp-validation-for="pharmacy.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.AddressLine1" class="form-control br-0 mb-2" placeholder="Pharmacy address line 1">
+                    <span asp-validation-for="pharmacy.AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.AddressLine2" class="form-control br-0 mb-2" placeholder="Pharmacy address line 2(optional)">
+                    <span asp-validation-for="pharmacy.AddressLine2" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.City" class="form-control br-0 mb-2" placeholder="city">
+                    <span asp-validation-for="pharmacy.City" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select id="dropdownPharmacyState" asp-for="pharmacy.State" class="hide-select" asp-items="@(new SelectList(listStateAll,"Id","StateName"))">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="pharmacy.State" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="pharmacy.ZipCode" oninput="Numeric(this)" class="form-control br-0 mb-2" placeholder="Pharmacy zip code">
+                    <span asp-validation-for="pharmacy.ZipCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">Finish Account Setup:</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.FirstName" class="form-control br-0 mb-2" placeholder="First name">
+                    <span asp-validation-for="finishAccount.FirstName" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.LastName" class="form-control br-0 mb-2" placeholder="Last name">
+                    <span asp-validation-for="finishAccount.LastName" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.DateOfBirth" class="form-control br-0 mb-2 text-uppercase" placeholder="Last name">
+                    <span asp-validation-for="finishAccount.DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.PhoneNumber" class="form-control br-0 mb-2 IsPhoneNumber" placeholder="Phone Number">
+                    <span asp-validation-for="finishAccount.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.AddressLine1" class="form-control br-0 mb-2" placeholder="Address line 1">
+                    <span asp-validation-for="finishAccount.AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.AddressLine2" class="form-control br-0 mb-2" placeholder="Address line 2 (optional)">
+                    <span asp-validation-for="finishAccount.AddressLine2" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.City" class="form-control br-0 mb-2" placeholder="City">
+                    <span asp-validation-for="finishAccount.City" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select id="dropdownAccountState" asp-for="finishAccount.State" class="hide-select" asp-items="@(new SelectList(listStateAll,"Id","StateName"))">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="finishAccount.State" class="text-danger"></span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input asp-for="finishAccount.ZipCode" oninput="Numeric(this)" class="form-control br-0 mb-2" placeholder="Zip Code">
+                    <span asp-validation-for="finishAccount.ZipCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row border align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-0">When did you first notice you were experiencing hair loss?</p>
+            </div>
+            <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+                <div class="control-group">
+                    <label class="control control--checkbox">
+                        <b>$30:</b> Physician Consult
+                        +
+                        Prescription
+                        (30 day supply)
+                        <input type="radio" name="medicineconsult">
+                        <div class="control__indicator"></div>
+                    </label>
+                    <label class="control control--checkbox ">
+                        <b>$40:</b> Physician Consult
+                        +
+                        Prescription
+                        (30 day supply)
+                        +
+                        1 refill
+                        (30 day supply)
+                        <input type="radio" name="medicineconsult">
+                        <div class="control__indicator"></div>
+                    </label>
+                    <label class="control control--checkbox">
+                        <b>$50:</b>Physician Consult
+                        +
+                        Prescription
+                        (30 day supply)
+                        +
+                        2 refills
+                        (30 day supply each)
+                        <input type="radio" name="medicineconsult">
+                        <div class="control__indicator"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center ">
+            <button type="submit" class="btn btn-primary my-2 br-0 btn-theme2">CREATE PATIENT CHART</button>
+        </div>
+    </form>
+</section>
+
+
+@section Scripts {
+    <script src="~/JS/EDManualQuestionnaire.js?v=1.0.0.0"></script>
+}

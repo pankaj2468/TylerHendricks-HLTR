@@ -1,0 +1,127 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject IUserService _userService
+@{
+    ViewData["Title"] = "Consultations";
+    var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+    var listConsultation = (await _repoCollection.Patients.GetDetailViews(sessionManager.ConsultationCategoryId, (bool)ViewBag.IsHomeDelivery)
+        .ConfigureAwait(true)).OrderBy(x => x.Refill).ToList();
+    var medicationList = await _repoCollection.Patients.GetMedications(sessionManager.ConsultationCategoryId).ConfigureAwait(true);
+}
+<style>
+    .hidden {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    input[type=radio] + label {
+        color: #ccc;
+        font-style: normal;
+    }
+
+    input[type=radio]:checked + label {
+        color: #fff !important;
+        background-color: #656b80 !important;
+        font-style: normal;
+    }
+
+    .ckbox-button {
+        height: 26px;
+        text-align: center;
+        font-style: normal !important;
+        background: #1c2541;
+        color: #fff !important;
+        font-weight: bold;
+        border-radius: 2px;
+        text-transform: uppercase;
+        padding: 2px 1rem;
+        line-height: 1.5;
+    }
+
+    li {
+        list-style-type: none;
+        position: relative;
+        padding-left: 5px;
+    }
+
+        li:before {
+            content: "\25BA \0020";
+            font-size: 12px;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            color: #1c2541;
+        }
+</style>
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "SELECT A CONSULTATION OPTION" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid custom-padding">
+            <form method="post" class="formconsultationoption" id="formConsultationOption">
+                <div class="row chooseMedication">
+                    <input type="hidden" id="hidMedicationIdForHairLoss" name="MedicationId" value="@medicationList[0].MedicationId" />
+                    <input type="hidden" id="hidMedicationDetailForHairLoss" name="MedicationDetailId" value="" />
+                    <div class="col-md-12 mt-4 mb-2 text-center text-md-left pl-0">
+                        <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="FinishAccountSetupHairLoss" asp-area="PatientPortal">
+                            <img src="~/Images/arrow-alt.png" alt="">Previous
+                        </a>
+                    </div>
+                    <div class="col-md-12 d-flex flex-column align-items-center consultationOption custom-padding">
+                        <p class="para" style="text-align:center;margin-left:10px">
+                            Finasteride 1 mg is a prescription medicine approved by the FDA to treat male hair loss.<br />
+                            It's effective in nearly all men if you take it regularly for several months.<br /><br />
+                            Please select one of the following consultation options:
+                        </p>
+                    <div class="selectWrap d-flex justify-content-between align-content-center">
+                        @{ int i = 1; }
+                        @foreach (var item in listConsultation)
+                        {
+                            <div class="box shadow-lg">
+                                <div class="tabDose d-flex flex-column justify-content-between">
+                                    <div class="dollor-bg"><b>$@Convert.ToInt32(item.MedicationRate)</b></div>
+                                    <p style="font-weight: bold;">@(3*i) MONTH PRESCRIPTION INCLUDES:</p>
+                                    <ul>
+                                        <li>Physician Consultation</li>
+                                        @if (item.IsHomeDelivery)
+                                        {
+                                            <li>@((item.RefillDay/30)*(item.Refill+1))-month supply (@(item.RefillDay*(item.Refill+1)) tablets) of Finasteride 1 mg</li>
+                                        }
+                                        else
+                                        {
+                                            string innerHtml = "1 prescription for a 3 month supply(90 tablets) of Finasteride 1 mg";
+                                            @switch (item.Refill)
+                                            {
+                                                case 0:
+                                                    break;
+                                                case 1:
+                                                    innerHtml += " with 1 refill(90 tablets)";
+                                                    break;
+                                                default:
+                                                    innerHtml += " with "+item.Refill+" refills (90 tablets each)";
+                                                    break;
+                                            }
+                                            <li>@innerHtml</li>
+                                        }
+                                    </ul>
+                                    <input type="radio" class="hidden chooseMedication" data-value="@item.Id" name="cb" id="cb@(item.Id)">
+                                    <label for="cb@(item.Id)" class="btn btn-block ckbox-button">SELECT</label>
+                                </div>
+                            </div>
+                            i++;
+                        }
+                        </div>
+                        <p class="consultationOptionNotes text-center" style="margin-left:10px">
+                            <i><a href="https://www.hendrxhealth.com/important-safety-information-finasteride" target="_blank" style="color: #52bfbd">Click here</a></i> <i>for important safety information</i>
+                        </p>
+                    </div>
+                    <div class="btnWrapper col-12">
+                        <div class="text-center mb-2">
+                            <span class="text-danger" style="display:none" id="ChooseYourMedicationError">Please select a consultation option</span>
+                        </div>
+                        <button type="submit" class="btn btn-next mb-4">CHECKOUT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

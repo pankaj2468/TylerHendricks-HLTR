@@ -1,0 +1,703 @@
+﻿@{
+    ViewData["Title"] = "Patient Chart";
+}
+@await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = true, HeadingText = "PHYSICIAN DASHBOARD" })
+
+<section class=" mx-auto ques-width my-5">
+    <div class=" d-flex justify-content-center align-items-center flex-column">
+        <h4 class="text-center modal-consultation-type-heading">MANUAL PATIENT INTAKE</h4>
+        <div class="select mt-3 questionairee-select-width">
+            <select class="form-control md-unit list-medication hide-select">
+                <option selected>Hair Loss</option>
+                <option value="1">HA</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select><div class="custom-select">Hair Loss</div>
+        </div>
+
+    </div>
+    <div class="row border d-flex  align-items-center mt-3">
+        <div class="col-lg-8">
+            <p class="mb-0">In which state you are currently?</p>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background  pb-1 pt-2">
+            <div class="select w-100">
+                <select class="form-control md-unit list-medication hide-select">
+                    <option selected>Select State</option>
+                    <option value="1">HA</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select><div class="custom-select">Select State</div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you a male aged 18-75 seeking treatment for male pattern hair loss?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Patient email address:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <input type="text" id="username" name="username" class="w-100">
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">When did you first notice you were experiencing hair loss?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+
+
+            <div class="control-group ">
+
+                <label class="control control--checkbox">
+                    Less than 6 months ago
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    6-12 months ago
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+                <label class="control control--checkbox">
+                    1-2 years ago
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    2+ years ago
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+          
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Hair loss can be hereditary. Has anyone in your family experienced hair loss?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Where have you been experiencing hair loss?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+
+            <div class="control-group ">
+
+                <label class="control control--checkbox">
+                    Preventive
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    Crown
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+                <label class="control control--checkbox">
+                    Hairline
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    Crown & Hairline
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+          
+
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">
+                Have you experienced any of the following?
+                <br />
+                Hair loss in areas other than your scalp
+                Changes to the skin of your scalp or body, including rashes, discoloration, etc.
+                Sudden, recent hair loss with rapid worsening
+            </p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <div class="mt-2">
+                <p class="mb-0">Have you tried medication or over the counter products in the past such as:</p>
+                <ul class="pl-0 pr-0 mt-2 faq-style">
+                    <li>Finasteride</li>
+                    <li>Minoxidil</li>
+                    <li>Ketoconazole 2% Shampoo</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 questionairee-form-background  questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <div class="mt-2">
+                <p class="mb-0">Other factors may contribute to hair loss. Do any of the following apply to you?</p>
+                <ul class="pl-0 pr-0 mt-2 faq-style">
+                    <li>Excessive alcohol intake (more than three drinks per day)</li>
+                    <li>Excessive sun exposure</li>
+                    <li>Following a restrictive diet</li>
+                    <li>Physical exercise with extreme intensity</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 questionairee-form-background  questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Do you have a history of depression?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you currently experiencing symptoms of depression?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <div class="mt-2">
+                <p class="mb-0">Finasteride has been reported to cause worsening of depression symptoms.</p>
+                <ul  class="pl-0 pr-0 mt-2 faq-style">
+                    <li>Do you agree with the following?</li>
+                    <li>
+                        If you experience worsening symptoms of depression you will stop finasteride immediately
+                        and will follow up with your in-person provider for further evaluation.
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 questionairee-form-background  questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">
+                The majority of patients taking finasteride tolerate the medication very well. Rarely,
+                patients have reported symptoms of sexual side effects. Clinical evidence suggests
+                < 4% of men taking finasteride experienced a sexual side effect such as erectile
+                dysfunction, decreased libido, and /or changes in ejaculate volume. If you experience
+                any of these side effects, it is recommended that you discontinue finasteride
+                immediately. These symptoms are likely to improve after stopping the medication.
+            </p>
+            <ul class="pl-0 pr-0 mt-2 faq-style">
+                <li>Do you agree with the following?</li>
+                <li>
+                    If you experience sexual side effects from finasteride you will stop the medication immediately.
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Are you currently taking any medications or supplements?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Please list your current medication and the corresponding medical condition</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div id="DivAddDynamicMedication">
+                <div class="d-flex align-items-start justify-content-around flex-wrap flex-lg-nowrap feilds mb-2 medicationdiv flex-column">
+
+                    <div class="formWrap w-100 m-0">
+                        <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Enter drug name"> <span class="text-danger form-display" >Required</span>
+                    </div>
+                    <div class="formWrap w-100 m-0 ">
+                        <input class="form-control md-dose br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Enter dosage"> <span class="text-danger form-display " >Required</span>
+                    </div>
+                    <div class="formWrap w-100 m-0">
+                        <div class=" mb-2">
+                            <div class="select"><select class="form-control md-unit list-medication hide-select"><option value="0">Unit</option><option value="1">%</option><option value="2">grams</option><option value="3">IU</option><option value="4">mcg</option><option value="5">mg</option><option value="6">mg/ml</option><option value="7">ml</option><option value="8">units</option></select><div class="custom-select">Unit</div><ul class="select-options form-display" ><li rel="0">Unit</li><li rel="1">%</li><li rel="2">grams</li><li rel="3">IU</li><li rel="4">mcg</li><li rel="5">mg</li><li rel="6">mg/ml</li><li rel="7">ml</li><li rel="8">units</li></ul></div> <span class="text-danger form-display">Required</span>
+                        </div>
+                    </div>
+                    <div class="formWrap w-100 m-0">
+                        <div class=" mb-2">
+                            <div class="select"><select class="form-control md-form list-medication hide-select"><option value="0">Form</option><option value="1">capsule</option><option value="2">cream</option><option value="3">drops</option><option value="4">liquid</option><option value="5">ointment</option><option value="6">puffs</option><option value="7">spray</option><option value="8">units</option><option value="9">powder</option><option value="10">tablet</option></select><div class="custom-select">Form</div><ul class="select-options form-display" ><li rel="0">Form</li><li rel="1">capsule</li><li rel="2">cream</li><li rel="3">drops</li><li rel="4">liquid</li><li rel="5">ointment</li><li rel="6">puffs</li><li rel="7">spray</li><li rel="8">units</li><li rel="9">powder</li><li rel="10">tablet</li></ul></div> <span class="text-danger form-display" >Required</span>
+                        </div>
+                    </div>
+                    <div class="formWrap w-100 m-0">
+                        <div class=" mb-2">
+                            <div class="select"><select class="form-control md-frequency list-medication hide-select"><option value="0">Frequency</option><option value="1">once daily</option><option value="2">twice daily</option><option value="3">three times daily</option><option value="4">four times daily</option><option value="5">six times daily</option><option value="6">weekly</option><option value="7">as needed</option><option value="8">nightly</option></select><div class="custom-select">Frequency</div><ul class="select-options form-display" ><li rel="0">Frequency</li><li rel="1">once daily</li><li rel="2">twice daily</li><li rel="3">three times daily</li><li rel="4">four times daily</li><li rel="5">six times daily</li><li rel="6">weekly</li><li rel="7">as needed</li><li rel="8">nightly</li></ul></div> <span class="text-danger form-display" >Required</span>
+                        </div>
+                    </div>
+                    <div class="formWrap w-100 m-0">
+                        <input class="form-control md-medical-condition br-0" maxlength="500" type="text" oninput="checkEmpty(this)" placeholder="Enter medical condition"> <span class="text-danger form-display">Required</span>
+                    </div>
+                    <div class="d-block  d-flex justify-content-between add-btn-width align-items-center mt-2 w-100">
+                        <span id="ErrorMessgeMedi" class="text-danger form-display">Please fill out all required fields</span>
+                        <button type="button" id="btnstatic" class="btn-theme2 fs-22  btn-mr new-next-btn mb-3 mt-0 next-btn-full " onclick="MedicationDoseRow(this)">ADD</button>
+                        <button type="submit" class="btn-theme2 fs-22  btn-mr new-next-btn mb-3 mt-0 next-btn-full" onclick="SetResponse(this, true,58);">NEXT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Please list any allergies and/or medication reactions. If not applicable, click next.</p>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <textarea id="txthairlossallergies_textarea" class="allergy-textarea"></textarea>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+
+            <ul class="pl-0 pr-0 mt-2 faq-style">
+                <li> Do you agree with the following?</li>
+                <li>1. You will STOP your medication and seek immediate medical attention if you experience any concerning side effects of treatment.</li>
+                <li>2. You will consult with your in-person doctor before starting a new medication.</li>
+                <li>3. The treatment is solely for your own use.</li>
+                <li>4. You have answered all of the previous questions accurately and truthfully.</li>
+                <li>5. You understand our providers take your answers in good faith and base their prescribing decisions accordingly, and that incorrect information can be hazardous to your health.</li>
+            </ul>
+        </div>
+        <div class="col-lg-4 questionairee-form-background questionairee-form-height pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Please upload a photo of your scalp.</p>
+            <i>You can upload up to 3 photos</i>
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed1')">
+                        <i class="fa fa-plus" id="medSelection1" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview1">
+                    </div>
+                    <input type="file" id="fuploadMed1" onchange="fileValidateMed(this,'RxPreview1','medSelection1')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed2')">
+                        <i class="fa fa-plus" id="medSelection2" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview2">
+                    </div>
+                    <input type="file" id="fuploadMed2" onchange="fileValidateMed(this,'RxPreview2','medSelection2')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed3')">
+                        <i class="fa fa-plus" id="medSelection3" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview3">
+                    </div>
+                    <input type="file" id="fuploadMed3" onchange="fileValidateMed(this,'RxPreview3','medSelection3')" accept="image/*" hidden="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">UPLOAD SELFIE & PHOTO ID.</p>
+
+
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed1')">
+                        <i class="fa fa-plus" id="medSelection1" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview1">
+                    </div>
+                    <p class="mb-0">Selfie Photo</p>
+                    <input type="file" id="fuploadMed1" onchange="fileValidateMed(this,'RxPreview1','medSelection1')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    <div class="square" onclick="openFileDialog('#fuploadMed2')">
+                        <i class="fa fa-plus" id="medSelection2" aria-hidden="true"></i>
+                        <img class="tri-image hide-select" src="" id="RxPreview2">
+                    </div>
+                    <p class="mb-0"> Photo ID</p>
+                    <input type="file" id="fuploadMed2" onchange="fileValidateMed(this,'RxPreview2','medSelection2')" accept="image/*" hidden="">
+                </div>
+                <div class="col-4">
+                    
+                    @*<div class="square" onclick="openFileDialog('#fuploadMed3')">
+                            <i class="fa fa-plus" id="medSelection3" aria-hidden="true"></i>
+                            <img class="tri-image hide-select" src="" id="RxPreview3">
+                        </div>
+                        <input type="file" id="fuploadMed3" onchange="fileValidateMed(this,'RxPreview3','medSelection3')" accept="image/*" hidden="">*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Pharmacy Information:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <form>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy name"> <span class="text-danger form-display" >Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy phone number"> <span class="text-danger form-display" >Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy address line 1"> <span class="text-danger form-display" >Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy address line 2(optional)"> <span class="text-danger form-display" >Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="city"> <span class="text-danger form-display" >Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select class="form-control md-unit list-medication hide-select">
+                            <option selected>Select Consultation Type</option>
+                            <option value="1">HA</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select><div class="custom-select">State</div>
+                    </div>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy zip code"> <span class="text-danger form-display">Required</span>
+                </div>
+
+
+            </form>
+
+
+
+        </div>
+    </div>
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Patient account setup details:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <form>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="First name"> <span class="text-danger form-display">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Last name"> <span class="text-danger form-display">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control br-0 text-uppercase mb-2" type="date" data-val="true" data-val-required="Required" id="DateOfBirth" name="DateOfBirth" value="">
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Phone number"> <span class="text-danger form-display">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Address line 1"> <span class="text-danger form-display">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Address line 2 (optional)"> <span class="text-danger form-display">Required</span>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="city"> <span class="text-danger form-display">Required</span>
+                </div>
+
+
+                <div class="formWrap w-100 m-0">
+                    <div class="select w-100 mb-2">
+                        <select class="form-control md-unit list-medication hide-select">
+                            <option selected>Select Consultation Type</option>
+                            <option value="1">HA</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select><div class="custom-select">State</div>
+                    </div>
+                </div>
+                <div class="formWrap w-100 m-0">
+                    <input class="form-control md-drugname br-0 mb-2" maxlength="200" type="text" oninput="checkEmpty(this)" placeholder="Pharmacy zip code"> <span class="text-danger form-display">Required</span>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+
+
+
+
+    
+
+    <div class="row border align-items-center">
+        <div class="col-lg-8">
+            <p class="mb-0">Consultation option:</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group ">
+
+                <label class="control control--checkbox">
+                    <b>$30:</b> 3-month Prescription
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    <b>$55:</b> 6-month Prescription
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+                <label class="control control--checkbox">
+                    <b>$80:</b> 9-month Prescription
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox">
+                    <b>$99:</b> 12-month Prescription
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+
+
+        
+        </div>
+    </div>
+    <div class="row border align-items-center ">
+        <div class="col-lg-8">
+            <p class="mb-0">Would you like to add a prescription for Ketoconazole 2% shampoo?</p>
+        </div>
+        <div class="col-lg-4 questionairee-form-background pb-1 pt-2">
+            <div class="control-group d-flex">
+
+                <label class="control control--checkbox">
+                    Yes
+                    <input type="checkbox" checked="checked">
+                    <div class="control__indicator"></div>
+                </label>
+                <label class="control control--checkbox ml-2">
+                    No
+                    <input type="checkbox">
+                    <div class="control__indicator"></div>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class=" d-flex align-items-center justify-content-center ">
+
+        <button class="btn btn-primary my-2 br-0 btn-theme2">CREATE PATIENT CHART</button>
+
+
+    </div>
+</section>
+
+

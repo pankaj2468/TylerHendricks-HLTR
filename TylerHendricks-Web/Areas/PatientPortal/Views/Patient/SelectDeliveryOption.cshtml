@@ -1,0 +1,69 @@
+﻿@inject IUserService _userService
+@model SelectDeliveryOptionView
+@{
+    ViewData["Title"] = "Select Delivery Option";
+    var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+}
+<div class="w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = false, HeadingText = "" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid">
+            <form id="frmSelectDelivery" method="post" class="select-delilvery-options">
+                <input type="text" asp-for="isHomeDelivery" id="hdnHomeDelivery" class="input-hidden"/>
+                <div class="row chooseMedication">
+                    <div class="col-md-12 mt-4 mb-2 text-center text-md-left pl-0">
+                        @if (sessionManager.ConsultationCategoryId == (int)ConsultationType.ErectileDysfunction)
+                        {
+                            <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="ChooseYourMedication" asp-area="PatientPortal">
+                                <img src="~/Images/arrow-alt.png" alt="">Previous
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="PreviousMove" asp-area="PatientPortal">
+                                <img src="~/Images/arrow-alt.png" alt="">Previous
+                            </a>
+                        }
+                    </div>
+                    <div class="col-md-12 d-flex flex-column align-items-center">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-center custom-head">
+                                    How would you like receive to your medication?
+                                </p>
+                            </div>
+                            <div class="data-flex">
+                                <div class="send-priscription">
+                                    <button type="button" data-value="False" class="theme-bg-13 btn-delivery-option">Send the prescription to my chosen pharmacy</button>
+                                    <ul class="dilvery-opt">
+                                        <li>Prescription sent within 24 hours</li>
+                                        <li>Cost of medication NOT included</li>
+                                        <li>Pay for your medication at your pharmacy</li>
+                                    </ul>
+                                </div>
+                                <div class="deliver-medication">
+                                    <button type="button" data-value="True" class="theme-bg-13 btn-delivery-option">Deliver my medication to my preferred address</button>
+                                    <ul class="dilvery-opt">
+                                        <li>Free Shipping</li>
+                                        <li>Delivery within approximately within 5-7 business days</li>
+                                        <li>Cost of medication included</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnWrapper p-0 col-12 mt-5">
+                        <div class="text-center mb-2">
+                            <span asp-validation-for="isHomeDelivery" class="text-danger"></span>
+                        </div>
+                        <button class="btn btn-next mb-4 px-5 custom-btn" type="submit">NEXT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+@section Scripts {
+
+    <script src="~/JS/SelectDeliveryOption.js?v=1.0.0.2"></script>
+}

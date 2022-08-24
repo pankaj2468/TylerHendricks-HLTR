@@ -1,0 +1,85 @@
+﻿@model List<ServiceState>
+@{
+    ViewData["Title"] = "Services State";
+    int leftSide = Convert.ToInt32(Math.Ceiling(Model.Count / 2.0));
+    int rightSide = Convert.ToInt32(Math.Floor(Model.Count / 2.0));
+    var leftSideRecords = Model.Take(leftSide).ToList();
+    var rightSideRecords = Model.Skip(leftSide).Take(leftSide).ToList();
+}
+@await Component.InvokeAsync("AdminHeader", new { StaticHeading = true, HeadingText = "ADMIN CONSOLE" })
+<section class="mt-5 container ">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-md-12 heading-profile mx-auto ">
+            <h4 class="text-center service-state-title">SERVICE STATES</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+                        @for (int i = 0; i < leftSideRecords.Count; i++)
+                        {
+                            <tr class="service-states-border">
+                                <div class="d-flex justify-content-between">
+                                    <td class="service-states-table-data">@leftSideRecords[i].StateName</td>
+                                    <td class="service-states-table-data">
+                                        <div class="onoffswitch" sid="@leftSideRecords[i].StateId">
+                                            @if (leftSideRecords[i].IsActive)
+                                            {
+                                                <input type="checkbox" name="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" class="onoffswitch-checkbox" id="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" checked="checked" hidden="hidden">
+                                                <label class="onoffswitch-label" for="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" onclick="changeToogleOnOff(this)">
+                                                    <span class="onoffswitch-inner">ACTIVE</span>
+                                                    <span class="onoffswitch-switch switch-right-on"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" class="onoffswitch-checkbox" id="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" hidden="hidden">
+                                                <label class="onoffswitch-label" for="@string.Concat(leftSideRecords[i].StateName.Replace(" ","-"),"-",leftSideRecords[i].StateId)" onclick="changeToogleOnOff(this)">
+                                                    <span class="onoffswitch-inner switch-off">INACTIVE</span>
+                                                    <span class="onoffswitch-switch switch-right-off"></span>
+                                                </label>
+                                            }
+                                        </div>
+                                    </td>
+                                </div>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table>
+                        @for (int i = 0; i < rightSideRecords.Count; i++)
+                        {
+                            <tr class="service-states-border">
+                                <div class="d-flex justify-content-between">
+                                    <td class="service-states-table-data">@rightSideRecords[i].StateName</td>
+                                    <td class="service-states-table-data">
+                                        <div class="onoffswitch" sid="@rightSideRecords[i].StateId">
+                                            @if (leftSideRecords[i].IsActive)
+                                            {
+                                                <input type="checkbox" name="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" class="onoffswitch-checkbox" id="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" checked="checked" hidden="hidden">
+                                                <label class="onoffswitch-label" for="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" onclick="changeToogleOnOff(this)">
+                                                    <span class="onoffswitch-inner">ACTIVE</span>
+                                                    <span class="onoffswitch-switch switch-right-on"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" class="onoffswitch-checkbox" id="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" hidden="hidden">
+                                                <label class="onoffswitch-label" for="@string.Concat(rightSideRecords[i].StateName.Replace(" ","-"),"-",rightSideRecords[i].StateId)" onclick="changeToogleOnOff(this)">
+                                                    <span class="onoffswitch-inner switch-off">INACTIVE</span>
+                                                    <span class="onoffswitch-switch switch-right-off"></span>
+                                                </label>
+                                            }
+                                        </div>
+                                    </td>
+                                </div>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script src="~/JS/ServiceState.js?v=0.0.0.0"></script>
+}

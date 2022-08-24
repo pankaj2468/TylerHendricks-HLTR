@@ -1,0 +1,80 @@
+﻿@inject IRepositoryCollection _repoCollection
+@model QuestionNaireViewModel
+@{
+    ViewData["Title"] = "Prescription";
+}
+
+<div id="UpdateContentDiv" class="w-100">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "Ketoconazole 2% Shampoo" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid">
+            <form method="post" id="formChooseYourMedication2" asp-controller="Patient" asp-action="PrescriptionforKetoconazolepost" asp-area="PatientPortal">
+                <div class="row chooseMedication">
+                    <input type="hidden" id="hidMedicationName" asp-for="chooseYourMedicationModel.MedicationName" value="" />
+                    <div class="col-md-12 mt-4 mb-2 text-center text-md-left pl-0">
+                        <a class="pre select-state-iconmargin ml-0" asp-controller="Patient" asp-action="ConsultationOptions" asp-area="PatientPortal">
+                            <img src="~/Images/arrow-alt.png" alt="">Previous
+                        </a>
+                    </div>
+                    <div class="col-md-12 p-0 d-flex flex-column align-items-center">
+
+                        <p class="text-center">
+                            <br />
+                            Clinical evidence has suggested Ketoconazole 2% shampoo may be beneficial in treating male pattern hair loss. This shampoo is prescribed<br />
+                            to be used 2-3 times per week, alternating with your regular shampoo. You are recommended to continue your routine conditioner.
+                            <br /><br />
+                            Would you like to add a prescription for Ketoconazole 2% shampoo to your consultation request at no additional cost?<br />
+                            <i>Prescription can be provided at no additional cost. You will pay for the cost of the shampoo at your pharmacy.</i>
+                        </p>
+                        <div class="btn-groupketo">
+                            <button type="button" id="btnaddketo" class="mr-2 theme-bg-13" text="Ketoconazole 2% Shampoo 120 ml">YES - ADD KETOCONAZOLE PRESCRIPTION</button>
+                            <input type="radio" name="hairlosstype" value="Ketoconazole 2% Shampoo 120 ml" hidden>
+                            <button type="button" class="ml-2 theme-bg-13" id="btnaddkeno">NO -  DO NOT ADD KETOCONAZOLE PRESCRIPTION</button>
+                            <input type="radio" name="hairlosstype" value="Ketoconazole 2% Shampoo 120 ml" hidden>
+                        </div>
+                        <div class="Msgbox shadow-lg" style="margin-top:50px">
+                            <div class="tabDose" id="MediSummary">
+                                <h5 style="color: #1c2541;text-align:center" class="mt-2"><b>Summary</b></h5>
+                                <p style="text-align:center" id="paratxt">
+                                    @if (Model.chooseYourMedicationModel != null)
+                                    {
+                                        <span>Physician consultation</span><br>
+                                        <span>@Model.chooseYourMedicationModel.MedicationName prescription (90 tablets)</span><br>
+                                        <span>@Model.chooseYourMedicationModel.MedicationQuantity</span><br />
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="model-prc">
+                            <h5><b>Total $<span id="TotalPrice">@Model.chooseYourMedicationModel.MedicationPrice</span></b></h5>
+                        </div>
+                    </div>
+                    <div class="btnWrapper p-0 col-12 mt-5">
+                        <div class="text-center mb-2">
+                            <span class="text-danger" id="ChooseYourMedicationError" style="display:none">Please select an option</span>
+                        </div>
+                        <button class="btn btn-next mb-4 px-5" type="submit">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<script>
+    $(function () {
+        $('#btnaddketo').on('click', function () {
+            if ($('#paratxt').find('.shampoo').length == 0) {
+                $('#paratxt').append('<span class="shampoo">' + $(this).attr('text') + '</span>');
+                $('#hidMedicationName').val('Finasteride 1 mg, Ketoconazole 2% Shampoo 120 ml');
+            }
+            $('#btnaddketo').removeClass('theme-bg-13').addClass('theme-bg-14');
+            $('#btnaddkeno').removeClass('theme-bg-14').addClass('theme-bg-13');
+        });
+        $('#btnaddkeno').on('click', function () {
+            $('#paratxt').children('.shampoo').remove();
+            $('#hidMedicationName').val('Finasteride 1 mg');
+            $('#btnaddketo').removeClass('theme-bg-14').addClass('theme-bg-13');
+            $('#btnaddkeno').removeClass('theme-bg-13').addClass('theme-bg-14');
+        });
+    });
+</script>

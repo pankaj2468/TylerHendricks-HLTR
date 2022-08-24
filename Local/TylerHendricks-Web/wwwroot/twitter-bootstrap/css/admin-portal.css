@@ -1,0 +1,59 @@
+﻿/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f4f1e8;
+}
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        font-weight:bold;
+    }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #5bc0be;
+            color:#ffff;
+        }
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+div.dataTables_wrapper div.dataTables_processing {
+    height: 60px;
+}
+.dataTables_processing {
+    color: #1c1b1b;
+}
+.dataTables_processing {
+    background: linear-gradient(to right, #f4f1e8 0%, #cbc8bf 25%, rgb(205 195 195 / 90%) 75%, rgb(40 37 37 / 0%) 100%);
+}
+table#tablePatientInfo thead tr th::before {
+    content: "1";
+    width: 0px;
+    font-size: 0px;
+    height: 0px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 5px;
+    background-color: #fff0;
+}

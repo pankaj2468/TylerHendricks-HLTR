@@ -1,0 +1,715 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject EnvironmentalResource _environmentalResource
+@model PatientChartViewModel
+@{
+    Layout = null;
+    var listState = await _repoCollection.States.GetStates();
+    var forms = await _repoCollection.Patients.GetMedicineForms();
+    var frequencies = await _repoCollection.Patients.GetMedicineFrequency();
+    var units = await _repoCollection.Patients.GetMedicineUnit();
+
+}
+<div class="pr-portal-btns mt-4">
+    @if (Model.RecordType == 1)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="teal-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 2)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="teal-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 3)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="teal-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 4)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="teal-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 5)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="teal-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 6)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="teal-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 7)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="teal-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="blue-btn">Not currently servicing your area</a>
+    }
+    else if (Model.RecordType == 8)
+    {
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="1" class="blue-btn">Ready to prescribe</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="2" class="blue-btn">Further review needed</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="3" class="blue-btn">Pending response</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="4" class="blue-btn">All patients</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="5" class="blue-btn">Denied</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="6" class="blue-btn">Potential duplicates</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="7" class="blue-btn">Responded</a>
+        <a asp-area="PhysicianPortal" asp-action="PhysicianDashboard" asp-controller="Home" asp-route-r="8" class="teal-btn">Not currently servicing your area</a>
+    }
+</div>
+<div class="row">
+    <input type="hidden" id="PatientId" value="@Model.PatientId" />
+    <input type="hidden" id="RecordTypeId" value="@Model.RecordType" />
+    <input type="hidden" id="RowNoId" value="@Model.RowNo" />
+    <input type="hidden" id="TotalRecord" value="@Model.TotalRecord" />
+    <input type="hidden" id="ConsultationId" value="@Model.ConsultationId" />
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-md-6 mt-2 userinfo-box">
+                <div class="teal-sml-title user-edit-patient">
+                    <div class="editbuton edit_new ">
+                        <a href="#" data-toggle="modal" data-target="#PatientModel" class="edit-btn" onclick="populatePatientData()">Edit</a>
+                    </div> @Model.PatientName
+                </div>
+                <p class="m-0"><span class="font-weight-bold">Email:</span> @Model.PatientEmail</p>
+                <p class="m-0"><span class="font-weight-bold">Phone:</span> @Model.PatientPhoneNumber.Replace("-", ".")</p>
+                <p class="m-0"><span class="font-weight-bold">DOB:</span> <strong class="text-danger">@Model.PatientDob</strong></p>
+                <p class="m-0"><span class="font-weight-bold">Age:</span> @Model.PatientAge</p>
+                <p class="m-0"><span class="font-weight-bold">Current Location:</span> @Model.StateCode</p>
+                <p class="m-0"><span class="font-weight-bold">Submitted:</span> @Model.Submitted ET</p>
+                <p class="m-0"><span class="font-weight-bold">Patient Address:</span><br />@Model.HomeAddress</p>
+                @if (Model.PaitentAccount)
+                {
+                    <p class="m-0"><span class="font-weight-bold">Account Status:</span> Active</p>
+                    <a style="cursor:pointer;" onclick="AccountStatus('@Model.PatientId')" class="sml-blue-btn">Deactivate Account</a>
+                }
+                else
+                {
+                    <p class="m-0"><span class="font-weight-bold">Account Status:</span> Deactivate</p>
+                    <a style="cursor:pointer;" onclick="AccountStatus('@Model.PatientId')" class="sml-blue-btn">Active Account</a>
+                }
+                <div class="teal-sml-title mt-1">
+                    <div class="editbuton edit_new">
+                        <a href="#" data-toggle="modal" data-target="#PharmacyModel" class="edit-btn" onclick="populatePharmacyData()">Edit</a>
+                    </div>
+                    @Model.PharmacyName
+                </div>
+                <div>@Model.PharmacyAddressLine1 @Model.PharmacyAddressLine2</div>
+                @if (!string.IsNullOrEmpty(Model.PharmacyCity))
+                {
+                    <div>@Model.PharmacyCity, @Model.PharmacyState @Model.PharmacyZipCode</div>
+                }
+                @if (!string.IsNullOrEmpty(Model.PharmacyPhone))
+                {
+                    <div> Phone: @Model.PharmacyPhone.Replace("-", ".")</div>
+                }
+            </div>
+            <div class="col-md-6 mt-2" id="DivAlert">
+                @if (Model.RecordType == 1)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Ready to prescribe</div>
+                }
+                else if (Model.RecordType == 2)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Further review needed</div>
+                }
+                else if (Model.RecordType == 3)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Pending</div>
+                }
+                else if (Model.RecordType == 4)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> All patients</div>
+                }
+                else if (Model.RecordType == 5)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Denied</div>
+                }
+                else if (Model.RecordType == 6)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Potential duplicates</div>
+                }
+                else if (Model.RecordType == 7)
+                {
+                    <div class="alert-blue px-3 pt-2 pb-2"><strong>Alerts:</strong> Responded</div>
+                }
+                <div class="alert-teal px-3 pt-2 pb-2 mt-1"><strong>Requested Rx:</strong> @Model.RequestedRx <br /><strong>Refills:</strong> @Model.Refills</div>
+                <div class="medications-section px-3 py-2 mt-1">
+                    <div class="font-weight-bold">Medications</div>
+                    @if (Model.Medications != null)
+                    {
+                        foreach (var item in Model.Medications)
+                        {
+                            <div>@item</div>
+                        }
+                    }
+                </div>
+                <div class="editbuton">
+                    <a href="#" data-toggle="modal" data-target="#MedicineModel" class="edit-btn" onclick="populateMedicineData()">Edit</a>
+                </div>
+            </div>
+        </div>
+        <div class="row chatMsgs">
+            <div class="col-md-9 mt-2 mb-md-2">
+                <div class="scrollY">
+                    @if (Model.UserChats != null)
+                    {
+                        foreach (var item in Model.UserChats.OrderByDescending(x => x.SendingDate))
+                        {
+                            if (!string.IsNullOrEmpty(item.Reply))
+                            {
+                                <div class="patientMsg">
+                                    <h6>@item.ReceiverName</h6>
+                                    <h6>@item.ReplyDate.Value.ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                                    <p>@Html.Raw(TextToHtml(item.Reply))</p>
+                                    @if (!string.IsNullOrEmpty(item.Attachment))
+                                    {
+                                        var base64 = await _repoCollection.AmazonCustom.GetImage(item.Attachment, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true);
+                                        <img src="@base64" width="100" />
+                                    }
+                                </div>
+                            }
+                            <div class="docMsg">
+                                <h6>@item.SenderName</h6>
+                                <h6>@item.SendingDate.ToString("MMMM dd, yyyy AT hh:mm tt").Replace("AT", "at")</h6>
+                                <p>@Html.Raw(TextToHtml(item.Message))</p>
+                            </div>
+                        }
+                    }
+                </div>
+                <textarea id="txtChatBox" placeholder="Type your message" class="w-100 mt-1 p-2"></textarea>
+                @if (Model.IsChatEnabled)
+                {
+                    <a do="" id="btnSubmitChat" style="cursor:pointer;" class="pp-submit-btn">Submit</a>
+                }
+                else
+                {
+                    <a do="" style="cursor:no-drop;" class="pp-submit-btn">Submit</a>
+                }
+                @if (Model.RecordType == 3 || Model.RecordType == 7)
+                {
+                    <div class="btn-move-to-all-patient-parent">
+                        <a class="btn-move-to-all-patient" href="javascript:void(0)" id="btnMoveToAllPatient">Move to All Patients</a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3 mt-2">
+                @if (Model.MedicationPictures != null)
+                {
+                    <!-- Swiper -->
+                    <div class="swiper-container mySwiper slide-style">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in Model.MedicationPictures)
+                            {
+                                var base64 = await _repoCollection.AmazonCustom.GetImage(item, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true);
+                                <div class="swiper-slide">
+                                    <a href="#" onclick="ViewRxImage(this)" data-toggle="modal" data-target="#RxModel">
+                                        <img src="@base64" class="img-fluid" onerror="ImgErrorVideo(this)" />
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <!-- Swiper JS -->
+                    <a style="cursor:pointer;" onclick="SetRequest('MI')" class="blue-btn w-100 retake-rx-btn mt-1">Retake Rx</a>
+                    <div class="btnText">@Model.MedicationUploadDate ET</div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-md-6  sm-mb-3 fixedHeight">
+                <div class="imagebox-height">
+                    <a href="#" data-toggle="modal" data-target="#SelfieModel">
+                        <img src="@(await _repoCollection.AmazonCustom.GetImage(Model.Selfie, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true))" class="w-100 h-100" onerror="ImgErrorVideo(this)" />
+                    </a>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="font12">@Model.SelfieUploadDate ET</div>
+                    <div><a onclick="SetRequest('SE')" style="cursor:pointer;" class="retake-selfie-btn">Retake Selfie</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 sm-mb-3 fixedHeight">
+                <div class="imagebox-height">
+                    <a href="#" data-toggle="modal" data-target="#PhotoIdModel">
+                        <img src="@(await _repoCollection.AmazonCustom.GetImage(Model.PhotoId, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true))" class="w-100 h-100" onerror="ImgErrorVideo(this)" />
+                    </a>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="font12">@Model.PhotoIdUploadDate ET</div>
+                    <div><a onclick="SetRequest('PI')" style="cursor:pointer;" class="retake-selfie-btn">Retake ID</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion accordion-style " id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Patient Encounters
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table class="table table-style">
+                            <thead>
+                                <tr>
+                                    <th>Consult Submission Date</th>
+                                    <th class="text-center">Requested Rx</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ConsultationLists != null)
+                                {
+                                    foreach (var item in Model.ConsultationLists)
+                                    {
+                                        <tr>
+                                            <td>@item.SubmissionDate ET</td>
+                                            <td class="text-center teal-text font-weight-bold"><a href="@(Url.Action("PatientChart", "Home", new { area= PortalType.PhysicianPortal.ToString()})+"?"+item.Link)" class="theme-color-12 link-hover">@item.RequestRx</a></td>
+                                            <td class="text-center">@item.Status</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Medical History & Assessment
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table class="table table-style table-medical-history">
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.QuestionnaireHistories != null)
+                                {
+                                    foreach (var item in Model.QuestionnaireHistories)
+                                    {
+                                        <tr>
+                                            <td>@StripHTML(item.Question)</td>
+                                            <td class="text-center teal-text font-weight-bold">@item.Answer</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Notes
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <textarea id="txtNotes" class="w-100 mt-1 p-2"></textarea>
+                            <button type="button" id="btnSaveNotes" class="btn-sm btn-info">Submit</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-style NotesTable">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Notes Detail</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Notes != null)
+                                {
+                                    foreach (var item in Model.Notes)
+                                    {
+                                        <tr>
+                                            <td>@item.DateAdd ET</td>
+                                            <td>
+                                                @if (item.IsFile)
+                                                {
+                                                    <a target="_blank" href="@item.Filename">@item.Filename</a>
+                                                }
+                                                else
+                                                {
+                                                    <span>@item.Filename</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-delete" onclick="DeleteNote('@item.Id')">Delete</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upload-image-profile mt-3">
+            <div class="custom-file" id="customFile" lang="es">
+                <input type="file" class="custom-file-input" id="PhysicianNoteUpload" aria-describedby="fileHelp">
+                <label class="custom-file-label attach-btn" for="exampleInputFile"></label>
+            </div>
+        </div>
+    </div>
+    <div class="h70"></div>
+    <div class="dlFooter">
+        <div class="row align-items-center justify-content-center h70">
+            <div class="col-md-2 md-text-right-sm-center sm-mb-3">
+                @if ((Model.RowNo - 1) > 0)
+                {
+                    <b onclick="MoveNextPrevPatient(@Model.RecordType,@(Model.RowNo-1));" style="cursor:pointer;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous </b>
+                }
+                else
+                {
+                    <b><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous </b>
+                }
+            </div>
+            <div class="col-md-6">
+                <div class="btn-wrapper d-flex justify-content-center">
+                    <button type="button" id="BtnPrescribe" class="btn prescribeBtn">Prescribe</button>
+                    <button type="button" status="0" id="BtnComplete" class="btn complBtn" disabled="disabled">Complete</button>
+                    <button type="button" id="BtnDeny" class="btn denyBtn">Deny</button>
+                </div>
+            </div>
+            <div class="col-md-2 sm-mt-3">
+                @if (Model.TotalRecord > Model.RowNo)
+                {
+                    <b onclick="MoveNextPrevPatient(@Model.RecordType,@(Model.RowNo+1));" style="cursor:pointer;">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></b>
+                }
+                else
+                {
+                    <b>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></b>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="SelfieModel" tabindex="-1" role="dialog" aria-labelledby="SelfieModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SelfieModelLabel">Preview Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="view-photo"><img src="@(await _repoCollection.AmazonCustom.GetImage(Model.Selfie, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true))" onerror="ImgErrorVideo(this)" /></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="PhotoIdModel" tabindex="-1" role="dialog" aria-labelledby="PhotoIdModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PhotoIdModelLabel">Preview Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="view-photo"><img src="@(await _repoCollection.AmazonCustom.GetImage(Model.PhotoId, _environmentalResource.AWSS3Credentials.BucketName, _environmentalResource.AWSS3Credentials.AccessKeyId, _environmentalResource.AWSS3Credentials.SecretAccessKey).ConfigureAwait(true))" onerror="ImgErrorVideo(this)" /></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="RxModel" tabindex="-1" role="dialog" aria-labelledby="RxModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="RxModalLabel">Preview Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="view-photo"><img src="" onerror="ImgErrorVideo(this)" /></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ChatBoxModel" tabindex="-1" role="dialog" aria-labelledby="RxModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="RxModalLabel1">Preview Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="view-photo"><img src="" onerror="ImgErrorVideo(this)" /></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@****************************************PATIENT INFORMATION START******************************************@
+<div class="modal fade" id="PatientModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h3 class=" text-center" id="exampleModalLabel">
+                    Patient Information
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="patientUpdateForm" method="post" data-ajax="true"
+                  data-ajax-loading="#Loader"
+                  data-ajax-complete="RequestCompletePatientUpdate"
+                  data-ajax-success="RequestSuccessPatientUpdate"
+                  data-ajax-failure="RequestFailurePatientUpdate"
+                  asp-action="UpdatePatient" asp-controller="Home" asp-area="PhysicianPortal">
+                <div class="modal-body">
+                    <input type="hidden" id="hdnPatientId" asp-for="UpdatePatientView.Id" />
+                    <div class="form-group">
+                        <label for="txtFirstName">First Name</label>
+                        <input type="text" asp-for="UpdatePatientView.FirstName" class="form-control br-0" oninput="LetterOnlyWithSpaces(this)" id="txtFirstName" placeholder="First name">
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.FirstName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtLastName">Last Name</label>
+                        <input type="text" asp-for="UpdatePatientView.LastName" class="form-control br-0" oninput="LetterOnlyWithSpaces(this)" id="txtLastName" placeholder="Last name">
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.LastName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDob">DOB</label>
+                        <input type="date" asp-for="UpdatePatientView.Dob" max="@DateTime.UtcNow.AddYears(-18).ToString("yyyy-MM-dd")" class="form-control br-0" id="txtDob" placeholder="mm/dd/yyyy">
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.Dob"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPhoneNumber">Phone number</label>
+                        <input type="tel" asp-for="UpdatePatientView.PhoneNumber" class="form-control br-0 IsPhoneNumber" oninput="NumericWithDots(this)" id="txtPhoneNumber" placeholder="Phone number">
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.PhoneNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlState">State</label>
+                        <div class="wrap">
+                            <select asp-for="UpdatePatientView.StateId" class="form-control br-0" asp-items="@(new SelectList(listState,"Id","StateName"))" id="ddlState">
+                                <option></option>
+                            </select>
+                        </div>
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.StateId"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtZipCode">Zip</label>
+                        <input type="text" asp-for="UpdatePatientView.ZipCode" class="form-control br-0" oninput="NumericWithDots(this)" id="txtZipCode" placeholder="Zip Code">
+                        <span class="text-danger" asp-validation-for="UpdatePatientView.ZipCode"></span>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-modal bg-danger">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@****************************************PATIENT INFORMATION END********************************************@
+@****************************************PHARMACY INFORMATION START*****************************************@
+<div class="modal fade" id="PharmacyModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h3 class=" text-center" id="exampleModalLabel">
+                    Pharmacy Information
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="pharmacyUpdateForm" method="post" data-ajax="true"
+                  data-ajax-loading="#Loader"
+                  data-ajax-complete="RequestCompletePharmacyUpdate"
+                  data-ajax-success="RequestSuccessPharmacyUpdate"
+                  data-ajax-failure="RequestFailurePharmacyUpdate"
+                  asp-action="UpdatePharmacy" asp-controller="Home" asp-area="PhysicianPortal">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="UpdatePharmacyView.PharmacyId" id="hdnPharmacyId" />
+                    <div class="form-group">
+                        <label for="txtPharmacyName">Pharmacy Name</label>
+                        <input type="text" asp-for="UpdatePharmacyView.PharmacyName" class="form-control br-0" id="txtPharmacyName" placeholder="Pharmacy name">
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.PharmacyName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPhPhoneNumber">Phone Number</label>
+                        <input type="tel" asp-for="UpdatePharmacyView.PhoneNumber" class="form-control br-0 IsPhoneNumber" id="txtPhPhoneNumber" oninput="NumericWithDots(this)" placeholder="Phone Number">
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.PhoneNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtAddressLine1">Address Line1</label>
+                        <input type="text" asp-for="UpdatePharmacyView.AddressLine1" class="form-control br-0" id="txtAddressLine1" placeholder="Address Line1">
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.AddressLine1"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtAddressLine2">Address Line2</label>
+                        <input type="text" asp-for="UpdatePharmacyView.AddressLine2" class="form-control br-0" id="txtAddressLine2" placeholder="Address Line2">
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.AddressLine2"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCity">City</label>
+                        <input type="text" asp-for="UpdatePharmacyView.City" class="form-control br-0" id="txtCity" placeholder="City" />
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.City"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlPhState">State</label>
+                        <div class="wrap">
+                            <select asp-for="UpdatePharmacyView.StateId" class="form-control br-0" asp-items="@(new SelectList(listState,"Id","StateName"))" id="ddlPhState">
+                                <option></option>
+                            </select>
+                        </div>
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.StateId"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPhZip">Zip</label>
+                        <input type="tel" asp-for="UpdatePharmacyView.ZipCode" class="form-control br-0" id="txtPhZip" oninput="NumericWithDots(this)" placeholder="Zip" />
+                        <span class="text-danger" asp-validation-for="UpdatePharmacyView.ZipCode"></span>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@****************************************PHARMACY INFORMATION END*******************************************@
+@****************************************MEDICINE INFORMATION START*****************************************@
+<div class="modal fade" id="MedicineModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-width modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                @*<h3 class=" text-center" id="exampleModalLabel">
+                        Medication
+                    </h3>*@
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="col-md-12 medicalCondition">
+                @*<p class="text-center">Please list your currrent medication and the corresponding medical condition <br /> (Click the add button to create the additional row) </p>*@
+                <div class="medicationWrapper mt-5">
+                    <input type="hidden" id="hdMedicineUnitList" value="@Newtonsoft.Json.JsonConvert.SerializeObject(units)" />
+                    <input type="hidden" id="hdMedicineFormList" value="@Newtonsoft.Json.JsonConvert.SerializeObject(forms)" />
+                    <input type="hidden" id="hdMedicineFrequencyList" value="@Newtonsoft.Json.JsonConvert.SerializeObject(frequencies)" />
+                    <input type="hidden" id="hdnMedPatientId" value="" />
+                    <input type="hidden" id="hdnMedConsultationId" value="" />
+                    <input type="hidden" id="hdnMedConsultationCategoryId" value="" />
+                    <div id="DivAddDynamicMedication">
+                        <div class="d-flex align-items-start justify-content-between flex-wrap flex-md-nowrap new-form feilds mb-2 medicationdiv">
+                            <div style="width:10.5%;" class="formWrap">
+                                <label></label>
+                            </div>
+                            <div style="width:20.5%;" class="formWrap">
+                                <label>Drug Name</label>
+                            </div>
+                            <div style="width:10.5%;" class="formWrap">
+                                <label>Dose</label>
+                            </div>
+                            <div style="width:11.5%;" class="formWrap">
+                                <label>Unit</label>
+                            </div>
+                            <div style="width:10.5%;" class="formWrap">
+                                <label>Form</label>
+                            </div>
+                            <div style="width:16.5%;" class="formWrap">
+                                <label>Frequency</label>
+                            </div>
+                            <div class="formWrap">
+                                <label>Medical Condition</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <span id="ErrorMessgeMedi" class="text-danger" style="display: none;">Please fill out all required fields</span>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 d-flex justify-content-center">
+                <button type="button" id="btnSaveMedicine" class="btn btn-modal br-0">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@****************************************MEDICINE INFORMATION END******************************************@
+<form id="formPage">
+    @Html.AntiForgeryToken();
+</form>

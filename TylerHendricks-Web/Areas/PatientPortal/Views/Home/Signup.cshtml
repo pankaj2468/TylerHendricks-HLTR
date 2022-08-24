@@ -1,0 +1,93 @@
+﻿@model Signup
+@{
+    ViewData["Title"] = "Patient Registration";
+}
+<div id="UpdateContentDiv" style="width:100%">
+    @await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = false, HeadingText = "" })
+    <section class="col-12 select-wrapper">
+        <div class="container-fluid">
+            <div class="row signIn">
+                <div class="col-md-12 mt-4 mb-2 text-center text-md-left pl-0">
+                    <a class="pre select-state-iconmargin ml-0" asp-action="StartConsultation" asp-controller="Home" asp-area="PatientPortal">
+                        <img src="~/Images/arrow-alt.png" alt=""> Previous
+                    </a>
+                </div>
+                <div class="col-12 d-flex align-items-center flex-column mt-2">
+                    <h4 class="caccount mt-3">CREATE ACCOUNT</h4>
+                    <form  id="SignUpForm" class="caccountForm" method="post" asp-action="Signup" asp-controller="Home" asp-area="PatientPortal">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="row justify-content-around flex-column">
+                            <div class="col-md-12 mb-2 ">
+                                <input type="text" asp-for="Email" placeholder="" class="form-control br-0" />
+                                <label class="text-uppercase">Email Address</label>
+                                <span id="errorEmail" style="display:none;" class="text-danger signup-error-message" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <input type="password" value="" asp-for="Password" placeholder="" class="form-control br-0" id="password" autocomplete="off" />
+                                <label class="text-uppercase">Password</label>
+                                <span id="errorPassword" style="display:none;" class="text-danger signup-error-message" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="password" value="" placeholder="" asp-for="ConfirmPassword" class="form-control br-0" id="confirm_password" onkeyup='check();' autocomplete="off" />
+                                <label class="text-uppercase">Verify Password</label>
+                                <span id="errorConfirmPassword" style="display:none;" class="text-danger signup-error-message" asp-validation-for="ConfirmPassword"></span>
+                            </div>
+                            <div class="col-md-12 round termsCond d-flex align-items-baseline justify-content-start">
+                                <input type="checkbox" id="checkbox" onchange="temCondHandler(event)" asp-for="TermCondition" />
+                                <label for="checkbox"></label>
+                                <p style="margin-left:10px;">
+                                    <span>By submitting this form you agree to our</span><br />
+                                    <span> <a href="https://www.hendrxhealth.com/terms-conditions" type="btn" target="_blank" style="color: #5BC0BE">terms & conditions </a> and <a href="https://www.hendrxhealth.com/privacy-policy" target="_blank" style="color: #5BC0BE">privacy policy</a></span>
+                                </p>
+                            </div>
+                            <div class="text-center col-md-12">
+                                <button type="submit" onclick="SetTimeZone();" class="btn btn-theme btn-block" id="btnSave" disabled="true">Create Account</button>
+                                <p class="text-left font14">Already have an account? <a class="my-a" asp-action="Login" asp-controller="Home" asp-area="PatientPortal">Log in </a></p>
+                            </div>
+                            <input type="hidden" asp-for="TimezoneOffSet" id="hdnTimeZone">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="TermConditionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Terms and  Conditions</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="TermsModelBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="PrivacyPoliciesModel" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1"><b>Privacy Policy</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="PrivacyModelBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/JS/User.js?v=1.0.0.3"></script>
+}

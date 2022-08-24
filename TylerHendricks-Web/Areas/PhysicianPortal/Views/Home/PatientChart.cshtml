@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Patient Chart";
+}
+
+@await Component.InvokeAsync("HeaderPhysician", new { StaticHeading = true, HeadingText = "PATIENT CHART" })
+<section class="pr-portal col-md-12 bg-white" id="PatientChart">
+    <partial name="_PatientChart">
+</section>
+
+@section Scripts
+{
+    <script src="~/JS/PatientChart.js?v=1.1.0.7"></script>
+}

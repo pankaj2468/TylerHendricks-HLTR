@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "UPLOAD SELFIE & PHOTO ID" });
+
+<style>
+    .flex_img {
+        display: flex;
+        justify-content: center; 
+        height: 400px;
+    }
+
+    .btn-theme1 {
+        background: #063b46;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 2px;
+        font-size: 1.3rem !important;
+        text-transform: uppercase;
+        padding: 0 1rem;
+        line-height: 1.5;
+        border: 0;
+    }
+
+    .w70 {
+        width: 22%;
+        margin: auto;
+    }
+</style>
+<section class="col-12">
+    <div class="container">
+        <div class="row mainQs">
+            <div class="col-12 d-flex align-items-center flex-column">
+                <form method="post">
+                    <div class="flex_img">
+                        <div class="left" style="margin-right: 225px;">
+                            <img src="~/Images/Selfie1.png" />
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn-theme1 btn-block">UPLOAD SELFIE</button>
+                            </div>
+                            <ul style="font-size: 0.6rem" class="mt-2">
+                                <li>Upload a selfie photo that shows your full face, head-on.</li>
+                                <li>if someone takes that photo for you, make sure they take it from up close.</li>
+                                <li>Include as little background as possible.</li>
+                                <li> Don't wear sunglasses, hats, or anything else that obstructs your face.</li>
+                                <li>If possible, remove glasses (even clear ones) to avoid problems with glare.</li>
+                                <li>Do not edit the image in any way.</li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <img src="~/Images/Selfie2.png" />
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn-theme1 btn-block">UPLOAD PHOTO ID</button>
+                            </div>
+                            <ul style="font-size: 0.6rem" class="mt-2">
+                                <li>Upload a clear photo of your government-issued ID that displays<br /> your name and date of birth.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center w70 mt-4">
+                        <button type="button" class="btn-theme2 btn-block mb-4" onclick="window.location.href='/PatientPortal/Patient/ChooseYourMedication'">Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

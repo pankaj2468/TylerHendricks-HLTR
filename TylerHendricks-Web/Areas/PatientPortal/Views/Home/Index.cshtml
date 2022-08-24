@@ -1,0 +1,264 @@
+﻿@inject IRepositoryCollection _repoCollection
+@inject IUsers _usersManager
+@inject IUserService _userService
+@model ConsultationView
+@{
+    ViewData["Title"] = "Choose Consultation Category";
+}
+
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = false, HeadingText = "" })
+
+<section class="col-12">
+    <div class="container">
+        <div class="row mainQs">
+            <div class="col-12 d-flex align-items-center flex-column">
+                <form method="post" asp-action="Index" asp-controller="Home" asp-area="PatientPortal">
+                    <input type="hidden" id="hdnConsultationId" asp-for="ConsultationCategoryId" />
+                    <input type="hidden" id="hdnIsStarted" asp-for="IsStarted" />
+                    <input type="hidden" id="hdnTimeZone" asp-for="TimeZone" />
+                    @if (!string.IsNullOrEmpty(User.Identity.Name))
+                    {
+                        var sessionManager = _userService.GetSeesionvalue<SessionManager>(SessionKey.SessionManager.ToString());
+                        var userId = await _usersManager.GetUserId(User.Identity.Name).ConfigureAwait(true);
+                        var timeZone = await _usersManager.GetTimeZone(userId).ConfigureAwait(true);
+                        var result = await _repoCollection.Patients.GetConsultation(userId).ConfigureAwait(true);
+                        var HairLoss = result.FindLast(x => x.ConsultationCategoryId == (int)ConsultationType.HairLoss);
+                        var MedicalRefill = result.FindLast(x => x.ConsultationCategoryId == (int)ConsultationType.MedicationRefill);
+                        var ErectileDysfunction = result.FindLast(x => x.ConsultationCategoryId == (int)ConsultationType.ErectileDysfunction);
+                        var ConsultationStatus = await _repoCollection.Patients.UserConsultationStatus(userId).ConfigureAwait(true);
+                        if (HairLoss.IsStarted == true || MedicalRefill.IsStarted == true || ErectileDysfunction.IsStarted == true)
+                        {
+                            <div class="d-flex justify-content-around flex-column mt-5 pt-5">
+                                <h3 class="text-center font-weight-bold pb-4" style="color: #16213f">FINISH YOUR CONSULTATION</h3>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex justify-content-around flex-column mt-5 pt-5">
+                                <h3 class="text-center font-weight-bold pb-4" style="color: #16213f">CHOOSE YOUR CONSULTATION TYPE</h3>
+                            </div>
+                        }
+                        <div class="category-button-2">
+                            @if (HairLoss.IsCompleted && ((HairLoss.EnabledDate.HasValue && HairLoss.EnabledDate.Value > DateTime.UtcNow) || !HairLoss.EnabledDate.HasValue))
+                            {
+                                <div class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn" style="opacity:0.5">
+                                    <button type="button" class="consultant-type" disabled="disabled">
+                                        <img src="/Images/user.png" class="img-consultanttype" />
+                                        HAIR LOSS
+                                    </button>
+                                </div>
+                                @if (HairLoss.EnabledDate.HasValue)
+                                {
+                                    <div>
+                                        <span class="text-danger font-12">Not eligible for a new hair loss consultation until @GetUserDateByTimeZone(HairLoss.EnabledDate.Value, timeZone.OffSet, timeZone.IsDayLightSaving).ToString("MM/dd/yy")</span>
+                                    </div>
+                                }
+                            }
+                            else 
+                            {
+                                if (HairLoss.Status)
+                                {
+                                    <div is-started="@HairLoss.IsStarted.ToString()" data-value="@HairLoss.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn" onclick="SetConsulation(this)" style="cursor:pointer;">
+                                        @if (HairLoss.IsStarted)
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/user.png" class="img-consultanttype" />
+                                                FINISH HAIR LOSS CONSULTATION
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/user.png" class="img-consultanttype" />
+                                                HAIR LOSS
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div is-started="@HairLoss.IsStarted.ToString()" data-value="@HairLoss.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn" style="opacity:0.5;">
+                                        <button type="button" class="consultant-type" disabled>
+                                            <img src="/Images/user.png" class="img-consultanttype" />
+                                            HAIR LOSS (Coming Soon)
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            <br />
+                            @if (MedicalRefill.IsCompleted && ((MedicalRefill.EnabledDate.HasValue && MedicalRefill.EnabledDate.Value > DateTime.UtcNow) || !MedicalRefill.EnabledDate.HasValue))
+                            {
+                                <div class="btn-theme2 btn-block btn-height60 bg-golden home-btn" style="opacity:0.5">
+                                    <button type="button" class="consultant-type" disabled="disabled">
+                                        <img src="/Images/medication.png" class="img-consultanttype" />
+                                        MEDICATION REFILL
+                                    </button>
+                                </div>
+                                if (MedicalRefill.EnabledDate.HasValue)
+                                {
+                                    <div>
+                                        <span class="text-danger font-12">Not eligible for a new medical refill consultation until @GetUserDateByTimeZone(MedicalRefill.EnabledDate.Value, timeZone.OffSet, timeZone.IsDayLightSaving).ToString("MM/dd/yy")</span>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (MedicalRefill.Status)
+                                {
+                                    <div is-started="@MedicalRefill.IsStarted.ToString()" data-value="@MedicalRefill.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-golden home-btn" onclick="SetConsulation(this)" style="cursor:pointer;">
+                                        @if (MedicalRefill.IsStarted)
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/medication.png" class="img-consultanttype" />
+                                                FINISH MEDICATION REFILL CONSULTATION
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/medication.png" class="img-consultanttype" />
+                                                MEDICATION REFILL
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div is-started="@MedicalRefill.IsStarted.ToString()" data-value="@MedicalRefill.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-golden home-btn" style="opacity:0.5;">
+                                        <button type="button" class="consultant-type" disabled>
+                                            <img src="/Images/medication.png" class="img-consultanttype" />
+                                            MEDICATION REFILL (Coming Soon)
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            <br />
+                            @if (ErectileDysfunction.IsCompleted && ((ErectileDysfunction.EnabledDate.HasValue && ErectileDysfunction.EnabledDate.Value > DateTime.UtcNow) || !ErectileDysfunction.EnabledDate.HasValue))
+                            {
+                                <div class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn" style="opacity:0.5">
+                                    <button type="button" class="consultant-type" disabled="disabled">
+                                        <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                        ERECTILE DYSFUNCTION
+                                    </button>
+                                </div>
+                                if (ErectileDysfunction.EnabledDate.HasValue)
+                                {
+                                    <div>
+                                        <span class="text-danger font-12">Not eligible for a new erectile dysfunction consultation until @GetUserDateByTimeZone(ErectileDysfunction.EnabledDate.Value, timeZone.OffSet, timeZone.IsDayLightSaving).ToString("MM/dd/yy")</span>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (ErectileDysfunction.Status)
+                                {
+                                    <div is-started="@ErectileDysfunction.IsStarted.ToString()" data-value="@ErectileDysfunction.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn" onclick="SetConsulation(this)" style="cursor:pointer;">
+                                        @if (ErectileDysfunction.IsStarted)
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                                FINISH ERECTILE DYSFUNCTION CONSULTATION
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="consultant-type">
+                                                <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                                ERECTILE DYSFUNCTION
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div is-started="@ErectileDysfunction.IsStarted.ToString()" data-value="@ErectileDysfunction.ConsultationCategoryId" class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn" style="opacity:0.5">
+                                        <button type="button" class="consultant-type" disabled>
+                                            <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                            ERECTILE DYSFUNCTION (Coming Soon)
+                                        </button>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        if (ConsultationStatus)
+                        {
+                            <div class="text-center mt-4">
+                                <div>
+                                    <p><a asp-area="PatientPortal" asp-controller="Patient" asp-action="orderhistory" class="patient-redirect">Click here</a> to be redirected to your patient account.</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        var listConsultation = await _repoCollection.Patients.GetConsultation().ConfigureAwait(true);
+                        var hairLoss = listConsultation.Find(x => x.Id == (int)ConsultationType.HairLoss);
+                        var medicalRefill = listConsultation.Find(x => x.Id == (int)ConsultationType.MedicationRefill);
+                        var erectileDysfunction = listConsultation.Find(x => x.Id == (int)ConsultationType.ErectileDysfunction);
+                        <div class="d-flex justify-content-around flex-column mt-5 pt-5">
+                            <h3 class="text-center font-weight-bold pb-4" style="color: #16213f">CHOOSE YOUR CONSULTATION TYPE</h3>
+                        </div>
+                        <div class="category-button">
+                            @if (hairLoss.Status)
+                            {
+                                <div is-started="False" data-value="3" class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn" onclick="SetConsulation(this)" style="cursor:pointer;">
+                                    <button type="button" class="consultant-type">
+                                        <img src="/Images/user.png" class="img-consultanttype" />
+                                        HAIR LOSS
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div is-started="False" data-value="3" class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn" style="opacity:0.5;">
+                                    <button type="button" class="consultant-type" disabled>
+                                        <img src="/Images/user.png" class="img-consultanttype" />
+                                        HAIR LOSS (Coming Soon)
+                                    </button>
+                                </div>
+                            }
+                            <br />
+                            @if (medicalRefill.Status)
+                            {
+                                <div is-started="False" data-value="2" class="btn-theme2 btn-block btn-height60 bg-golden home-btn" onclick="SetConsulation(this)" style="cursor:pointer;">
+                                    <button type="button" class="consultant-type">
+                                        <img src="/Images/medication.png" class="img-consultanttype" />
+                                        MEDICATION REFILL
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div is-started="False" data-value="2" class="btn-theme2 btn-block btn-height60 bg-golden home-btn" style="opacity:0.5;">
+                                    <button type="button" class="consultant-type" disabled>
+                                        <img src="/Images/medication.png" class="img-consultanttype" />
+                                        MEDICATION REFILL (Coming Soon)
+                                    </button>
+                                </div>
+                            }
+                            <br />
+                            @if (erectileDysfunction.Status)
+                            {
+                                <div is-started="False" data-value="1" class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn" onclick="SetConsulation(this)" style="cursor: pointer;">
+                                    <button type="button" class="consultant-type">
+                                        <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                        ERECTILE DYSFUNCTION
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div is-started="False" data-value="1" class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn" style="opacity:0.5;">
+                                    <button type="button" class="consultant-type" disabled>
+                                        <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                                        ERECTILE DYSFUNCTION (Coming Soon)
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

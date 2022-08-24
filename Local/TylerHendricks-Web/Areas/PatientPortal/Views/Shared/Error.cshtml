@@ -1,0 +1,137 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>Error - GlobalFrozenFoods</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="~/Content/Images/logo-icon.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="~/Content/Images/logo-icon.png" sizes="16x16" />
+    @*@Styles.Render("~/Content/css")*@
+
+    <script>function _pxDemo_loadStylesheet(a, b, c) { var c = c || decodeURIComponent((new RegExp(";\\s*" + encodeURIComponent("px-demo-theme") + "\\s*=\\s*([^;]+)\\s*;", "g").exec(";" + document.cookie + ";") || [])[1] || "clean"), d = "rtl" === document.getElementsByTagName("html")[0].getAttribute("dir"); document.write(a.replace(/^(.*?)((?:\.min)?\.css)$/, '<link href="$1' + (c.indexOf("dark") !== -1 && a.indexOf("https://uxpowered.com/css/") !== -1 && a.indexOf("https://uxpowered.com/themes/") === -1 ? "-dark" : "") + (!d || 0 !== a.indexOf("assets/css") && 0 !== a.indexOf("assets/demo") ? "" : ".rtl") + '$2" rel="stylesheet" type="text/css"' + (b ? 'class="' + b + '"' : "") + ">")) }</script>
+
+    <script>"ltr" !== document.getElementsByTagName("html")[0].getAttribute("dir") && "1" === decodeURIComponent((new RegExp(";\\s*" + encodeURIComponent("px-demo-rtl") + "\\s*=\\s*([^;]+)\\s*;", "g").exec(";" + document.cookie + ";") || [])[1] || "0") && document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");</script>
+
+    @*@Styles.Render("~/Content/bootstrapcss")*@
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script>
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <style>
+        .page-404-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .page-404-header,
+        .page-404-error-code,
+        .page-404-subheader,
+        .page-404-text,
+        .page-404-form {
+            position: relative;
+            padding: 0 30px;
+            text-align: center;
+        }
+
+        .page-404-header {
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 4px 0 rgba(0,0,0,.1);
+        }
+
+        .page-404-error-code {
+            margin-top: 60px;
+            color: #fff;
+            text-shadow: 0 4px 0 rgba(0,0,0,.1);
+            font-size: 120px;
+            font-weight: 700;
+            line-height: 140px;
+        }
+
+        .page-404-subheader,
+        .page-404-text {
+            margin-bottom: 60px;
+            color: rgba(0,0,0,.5);
+            font-weight: 600;
+        }
+
+        .page-404-subheader {
+            font-size: 50px;
+        }
+
+            .page-404-subheader:after {
+                position: absolute;
+                bottom: -30px;
+                left: 50%;
+                display: block;
+                width: 40px;
+                height: 4px;
+                margin-left: -20px;
+                content: "";
+                background: rgba(0,0,0,.2);
+            }
+
+        .page-404-text {
+            font-size: 20px;
+        }
+
+        .page-404-form {
+            max-width: 500px;
+            margin: 0 auto 60px auto;
+        }
+
+            .page-404-form * {
+                margin: 0 !important;
+                border: none !important;
+            }
+
+            .page-404-form .btn {
+                background: rgba(0, 0, 0, .3);
+            }
+    </style>
+    <!-- / Custom styling -->
+</head>
+<body>
+    <div class="page-404-bg bg-danger"></div>
+    <div class="page-404-header bg-white">
+        <a class="px-demo-brand px-demo-brand-lg text-default" href="@Url.Action("Index","Dashboard")">
+            <img class="full" src="~/Content/Images/GFLogo.png" />
+        Global Frozen Foods</a>
+    </div>
+    <h1 class="page-404-error-code"><strong>Sorry!</strong></h1>
+    <h2 class="page-404-subheader">Something Went Wrong</h2>
+    <h3 class="page-404-text">
+       An error occurred while processing your request Please try again
+        <br />
+        contact Support <a href="@Url.Action("Index","Dashboard")" class="btn btn-success"><i class="fa fa-home"></i> Home</a>
+    </h3>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/demo")*@
+    <script src="~/Scripts/pixeladmin.min.js"></script>
+    <script>
+    // -------------------------------------------------------------------------
+    // Initialize DEMO sidebar
+
+    $(function() {
+      pxDemo.initializeDemoSidebar();
+
+      $('#px-demo-sidebar').pxSidebar();
+      pxDemo.initializeDemo();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@inject IRepositoryCollection _repoCollection
+@model SessionManager
+@{
+    ViewData["Title"] = "finish Consultation Category";
+   // var listConsultations = await _repoCollection.Patients.GetConsultations();
+}
+@await Component.InvokeAsync("Header", new { ShowRightSection = false, ShowQuestions = false, StaticHeading = true, HeadingText = "FINISH YOUR CONSULTATION" })
+<section class="col-12">
+    <div class="container">
+        <div class="row mainQs">
+            <div class="col-12 d-flex align-items-center flex-column">
+                <form method="post">
+                    <input type="hidden" id="hidConsultationId" asp-for="ConsultationCategoryId" />
+                    <div class="d-flex justify-content-around flex-column mt-5 pt-5">
+                        <h2 class="text-center font-weight-bold pb-4" style="color: #16213f">WELCOME BACK</h2>
+                    </div>
+                    <div class="category-button-2">
+                        <div class="btn-theme2 btn-block btn-height60 bg-darkgray home-btn">
+                            <button type="submit" onclick="SetConsulationType(3)" class="consultant-type-2">
+                                <img src="/Images/user.png" class="img-consultanttype" />
+                                FINISH YOUR HAIR LOSS CONSULTATION
+                            </button>
+                        </div>
+                        <br />
+                        <div class="btn-theme2 btn-block btn-height60 bg-golden home-btn">
+                            <button type="submit" onclick="SetConsulationType(2)" class="consultant-type-2">
+                                <img src="/Images/medication.png" class="img-consultanttype" />
+                             FINISH YOUR MEDICATION REFILL CONSULTATION
+                            </button>
+                        </div>
+                        <br />
+                        <div class="btn-theme2 btn-block btn-height60 bg-trtoise home-btn">
+                            <button type="submit" onclick="SetConsulationType(1)" class="consultant-type-2">
+                                <img src="/Images/icon - erectile dysfunction.png" class="img-consultanttype" />
+                               FINISH YOUR ERECTILE DYSFUNCTION CONSULTATION
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
